@@ -23,11 +23,11 @@ function Movlayout() {
         />
       </div>
       <div
-      className={`fixed max-w-1/2 z-10 w-full mx-auto  transition-transform ease-in-out duration-800 ${active?"translate-x-0":"translate-x-full"} top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen bg-gray-50 border-l-2 px-2 md:px-12`}
+      className={`fixed max-w-1/2 z-50 w-full mx-auto  transition-transform ease-in-out  duration-800 ${active?"translate-x-0":"translate-x-full "} top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen bg-gray-50 border-l-2 px-2 md:px-12`}
       >
         <button
        
-        className='flex items-center justify-end w-full  md:py-7 md:pr-4 '
+        className='flex items-center justify-end w-full pt-4  md:py-7 md:pr-4 '
         ><RxCross2
         onClick={handleMenu}
         className='w-6 h-6'

@@ -31,6 +31,7 @@ function Layout() {
             <input
               className="text-lg"
               type="text"
+              name="search"
               placeholder="What are you lookin for ?"
             />
             <div>

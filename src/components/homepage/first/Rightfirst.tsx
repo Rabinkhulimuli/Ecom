@@ -86,10 +86,10 @@ function Rightfirst() {
         </div>
       </div>
       <div 
-      className="absolute  bottom-4 mx-auto inset-0  flex items-end  justify-center gap-2"
+      className="absolute bottom-2 md:bottom-4 mx-auto inset-0  flex items-end  justify-center gap-0.5 md:gap-2"
       >
         {arr.map((_,index)=> <div key={index}
-        className={`w-4 h-4    rounded-full transition-all duration-300 ease-in-out ${index == activeSlide?"bg-gray-400 ":"bg-white"}`}
+        className={`w-3 h-3 md:w-4 md:h-4    rounded-full transition-all duration-300 ease-in-out ${index == activeSlide?"bg-gray-700 border-white border-1 ":"bg-white"}`}
         > </div> )}
       </div>
     </div>

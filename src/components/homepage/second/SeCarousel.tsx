@@ -11,37 +11,38 @@ import { RxDoubleArrowRight } from "react-icons/rx";
 function SeCarousel() {
   const[alignCaro,setAlignCaro]=useState<"start"|"center">("start")
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align:`${alignCaro}` },
+    { loop: true, align:alignCaro },
     [AutoPlay({stopOnInteraction:true,stopOnMouseEnter:true})]
   );
   useEffect(()=> {
-    if(window.innerWidth <500){
-      setAlignCaro("center")
-    }else{
-      setAlignCaro("start")
+    const updateAlignment=()=> {
+      setAlignCaro(window.innerWidth <500?"center":"start")
     }
+    updateAlignment()
+    window.addEventListener("resize",updateAlignment)
+    return ()=> window.removeEventListener("resize",updateAlignment)
   },[])
 const scrollNext=useCallback(()=> emblaApi && emblaApi.scrollNext(),[emblaApi])
 const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
   return (
     <div className="relative">
-      <div className="absolute inset-0 flex justify-end gap-2 items-start m-auto right-0 z-10 -top-14" >
+      <div className="absolute inset-0 flex justify-end gap-2 items-start m-auto right-0 z-10 -top-10 md:-top-14" >
         <button
         onClick={scrollNext}
         className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
         >
-          <RxDoubleArrowRight className=" w-full rotate-180 text-2xl" />
+          <RxDoubleArrowRight className=" w-full rotate-180 md:text-2xl" />
         </button>
         <button
         onClick={scrollPrev}
         className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
         >
-          <RxDoubleArrowRight className=" w-full  text-2xl" />
+          <RxDoubleArrowRight className=" w-full  md:text-2xl" />
         </button>
       </div>
 
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
+      <div className="overflow-hidden w-full" ref={emblaRef}>
+        <div className="flex ">
           {secProduct.map((eh) => (
             <div
               key={eh.id}
@@ -61,12 +62,12 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
                 <div className="absolute transition-transform duration-700 ease-in-out opacity-0 cursor-pointer font-semibold capitalize  translate-y-10 group-hover:translate-y-0 group-hover:opacity-100  bottom-0 bg-black w-full py-1 text-white text-center">
                   Add to cart
                 </div>
-                <div className=" absolute  top-3 left-3 px-3 py-1 text-xs bg-[#DB4444] rounded-md text-white">
+                <div className=" absolute  top-3 left-3 px-1 py-0.5 md:px-3 md:py-1 text-xs bg-[#DB4444] rounded-md text-white">
                   <p>-{eh.discount}% </p>
                 </div>
-                <div className="absolute top-3 right-3">
-                  <TiHeartOutline className="w-8 h-8 bg-white p-1 rounded-full mb-2 z-10" />
-                  <GiBleedingEye className="w-8 h-8 bg-white p-1 rounded-full  z-10" />
+                <div className="absolute right-2 top-2 cursor-pointer md:top-3 md:right-3">
+                  <TiHeartOutline className=" w-6 h-6 md:w-8 md:h-8 bg-white p-1 rounded-full mb-1 md:mb-2 z-10" />
+                  <GiBleedingEye className="w-6 h-6 md:w-8 md:h-8 bg-white p-1 rounded-full  z-10" />
                 </div>
               </div>
               <div className="mt-4 flex flex-col gap-2 font-semibold ">
@@ -97,7 +98,7 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
       className="flex items-center  justify-center"
       >
         <p
-        className=" font-semibold text-white bg-[#DB4444] rounded-lg mt-10 lg:mt-16 px-12 py-4"
+        className=" font-semibold text-white bg-[#DB4444] rounded-lg mt-10 lg:mt-16 px-6 lg:px-12 py-2 lg:py-4"
         >View All Products</p>
       </div>
     </div>
