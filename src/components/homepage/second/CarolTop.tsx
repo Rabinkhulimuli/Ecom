@@ -23,8 +23,8 @@ function CarolTop() {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
   return (
-    <div className="flex flex-col gap-2 lg:flex-row justify-between md:max-w-[50%] lg:items-end">
-      <div className="flex flex-col gap-2 lg:gap-6">
+    <div className="category-2outer-div">
+      <div className="category-outer-div">
         <div className="flex items-center gap-2">
           <span
           className=" w-2 md:w-5  h-8 md:h-10 bg-[#DB4444] "

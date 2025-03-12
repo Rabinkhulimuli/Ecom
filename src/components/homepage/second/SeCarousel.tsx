@@ -7,12 +7,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import AutoPlay from "embla-carousel-autoplay";
 import { GiBleedingEye, GiStaryu } from "react-icons/gi";
 import { RxDoubleArrowRight } from "react-icons/rx";
-
 function SeCarousel() {
   const[alignCaro,setAlignCaro]=useState<"start"|"center">("start")
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align:alignCaro },
-    [AutoPlay({stopOnInteraction:true,stopOnMouseEnter:true})]
+    [AutoPlay({stopOnInteraction:true,stopOnMouseEnter:true,delay:5000})]
   );
   useEffect(()=> {
     const updateAlignment=()=> {
@@ -49,7 +48,9 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
               className="border-white border-4 flex-shrink-0  min-w-67 group"
             >
               <div className="relative flex py-10 min-w-67 h-62 overflow-hidden justify-center bg-gray-100">
-                <div className="max-w-43 max-h-38">
+                <div
+                
+                className="max-w-43 max-h-38">
                   <Image
                     className="w-full h-full object-cover"
                     src={eh.image}
@@ -59,7 +60,7 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
                     priority={true}
                   />
                 </div>
-                <div className="absolute transition-transform duration-700 ease-in-out opacity-0 cursor-pointer font-semibold capitalize  translate-y-10 group-hover:translate-y-0 group-hover:opacity-100  bottom-0 bg-black w-full py-1 text-white text-center">
+                <div className="absolute transition-transform duration-700 ease-in-out opacity-0 cursor-pointer font-semibold capitalize  translate-y-10 group-hover:-translate-y-2 group-hover:opacity-100  bottom-0 bg-black w-full py-2 text-white text-center">
                   Add to cart
                 </div>
                 <div className=" absolute  top-3 left-3 px-1 py-0.5 md:px-3 md:py-1 text-xs bg-[#DB4444] rounded-md text-white">
@@ -98,7 +99,7 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
       className="flex items-center  justify-center"
       >
         <p
-        className=" font-semibold text-white bg-[#DB4444] rounded-lg mt-10 lg:mt-16 px-6 lg:px-12 py-2 lg:py-4"
+        className="category-btn mt-10 lg:mt-16"
         >View All Products</p>
       </div>
     </div>

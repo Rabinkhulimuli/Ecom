@@ -6,10 +6,21 @@ import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 
 function CategoryCaro() {
   const[alignEmb,setAlignEmb]=useState<"start"|"center">("start")
-  const [emblaRef,emblaApi] = useEmblaCarousel({ loop: true ,align:alignEmb});
-  const prevbtn=useCallback(()=> emblaApi&&emblaApi.scrollPrev(),[emblaApi])
-  const nextbtn=useCallback(()=> emblaApi&&emblaApi.scrollNext(),[emblaApi])
-  useEffect(()=> {
+  const [emblaRef,emblaApi] = useEmblaCarousel(
+    { loop: true,align:alignEmb,containScroll:"keepSnaps",dragFree:true,skipSnaps:false
+    });
+  const prevbtn = useCallback(() => {
+    if (emblaApi && emblaApi.canScrollPrev()) {
+      emblaApi.scrollPrev();
+    }
+  }, [emblaApi]);
+
+  const nextbtn = useCallback(() => {
+    if (emblaApi && emblaApi.canScrollNext()) {
+      emblaApi.scrollNext();
+    }
+  }, [emblaApi]);
+   useEffect(()=> {
     const handleWid=()=> setAlignEmb(window.innerWidth < 500?"center":"start")
     handleWid()
     window.addEventListener("resize",handleWid)
@@ -35,7 +46,7 @@ function CategoryCaro() {
           {homeCategory.map((eh) => (
             <div
               key={eh.id}
-              className="flex-shrink-0 w-43 h-36 mr-8 flex flex-col border items-center transition-all ease-in-out duration-700 bg-white text-black hover:bg-[#DB4444] hover:text-white hover:scale-110 justify-center "
+              className="flex-shrink-0  w-43 h-36 mr-8 flex flex-col border items-center  bg-white text-black hover:bg-[#DB4444] hover:text-white justify-center "
             >
                 
               <div className="flex flex-col items-center justify-between gap-4">

@@ -5,13 +5,13 @@ import { CiSearch } from "react-icons/ci";
 import Movlayout from "./Movlayout";
 function Layout() {
   return (
-    <div className="  ">
-      <div className="flex my-4  items-center justify-between text-lg">
-        <div className="flex items-center justify-between lg:gap-48 ">
+    <div className=" mt-4  ">
+      <div className="flex   items-center justify-between text-lg">
+        <div className="flex items-center justify-between xl:gap-40 2xl:gap-48 ">
           <div className="font-bold text-2xl">
-            <p>Exclusive</p>{" "}
+            <p>XPRIVE</p>{" "}
           </div>
-          <div className="hidden md:flex items-center  justify-between gap-12">
+          <div className="hidden xl:flex items-center  justify-between gap-12">
             <div>
               <h2 className="hidden lg:block">Home</h2>
             </div>
@@ -22,7 +22,7 @@ function Layout() {
               <h2 className="hidden lg:block">About</h2>
             </div>
             <div>
-              <h2 className="hidden lg:block">Sign Up</h2>
+              <h2 className="hidden lg:block text-nowrap">Sign Up</h2>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ function Layout() {
               <CiSearch className="w-6 h-6 hidden lg:block" />
             </div>
           </div>
-          <div className="hidden lg:flex items-center justify-between gap-4">
+          <div className="hidden xl:flex items-center justify-between gap-4">
             <div>
               <GiSelfLove className="w-8 h-8" />
             </div>
@@ -47,7 +47,7 @@ function Layout() {
             </div>
           </div>
         </div>
-        <div className="block lg:hidden">
+        <div className="block xl:hidden">
           <Movlayout />
         </div>
       </div>

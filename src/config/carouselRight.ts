@@ -79,4 +79,22 @@ export const secProduct=[
         totalStar:0,
         image:"/homepage/secCarousel/havit.jpg"
     },
+    {
+        id:6,
+        discount:0,
+        title:"Havit HV-G92 Gamepad",
+        price:120,
+        NumStar:3,
+        totalStar:0,
+        image:"/homepage/secCarousel/havit.jpg"
+    },
+    {
+        id:7,
+        discount:0,
+        title:"Havit HV-G92 Gamepad",
+        price:120,
+        NumStar:3,
+        totalStar:0,
+        image:"/homepage/secCarousel/havit.jpg"
+    },
 ]
