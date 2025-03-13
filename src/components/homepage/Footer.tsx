@@ -7,7 +7,7 @@ import Owner from "./footer/Owner";
 
 function Footer() {
   return (
-    <div className=" bg-black flex items-center justify-center w-full">
+    <div className=" bg-black mt-12 md:mt-35 flex items-center justify-center w-full">
       <div className="relative px-12">
         <h2 className=" uppercase  absolute inset-0 m-auto   top-10   text-[3rem] md:top-4 tracking-tight text-center font-black md:text-[6rem] lg:text-[10rem] xl:text-[13rem] xl:tracking-wider p-0 bg-gradient-to-b from-black/80 to-transparent text-transparent bg-clip-text drop-shadow-[0px_-0.5px_0px_rgba(115,115,120,1)]">
           XPRIVE

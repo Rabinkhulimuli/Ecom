@@ -9,13 +9,13 @@ function ProductList() {
   return (
     <div className='space-y-4 md:space-y-15'>
       <TopBestSelling/>
-      <div className="grid grid-cols-2 md:grid-cols-4  justify-between gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4  justify-between gap-4">
                 {secProduct.slice(0,4).map((eh) => (
                   <div
                     key={eh.id}
-                    className="border-white border-4 flex-shrink-0  min-w-67 group"
+                    className="border-white border-4 flex-shrink-0  w-full group"
                   >
-                    <div className="relative flex py-10 min-w-67 h-62 overflow-hidden justify-center bg-gray-100">
+                    <div className="relative flex py-10 w-full px-4 sm:px-0 overflow-hidden justify-center bg-gray-100">
                       <div className="max-w-43 max-h-38">
                         <Image
                           className="w-full h-full object-cover"

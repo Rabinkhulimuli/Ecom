@@ -1,11 +1,13 @@
 import ProductList from "@/components/homepage/bestSellingProduct/ProductList";
 import Category from "@/components/homepage/category/Category";
+import Feature from "@/components/homepage/feature/Feature";
 import Leftfirst from "@/components/homepage/first/Leftfirst";
 import Rightfirst from "@/components/homepage/first/Rightfirst";
 import Musicbanner from "@/components/homepage/Musicbanner";
 import Ourproduct from "@/components/homepage/product/Ourproduct";
 import CarolTop from "@/components/homepage/second/CarolTop";
 import SeCarousel from "@/components/homepage/second/SeCarousel";
+import Options from "@/components/homepage/subfooter/Options";
 
 export default function Home() {
   return (
@@ -23,6 +25,8 @@ export default function Home() {
       <ProductList/>
       <Musicbanner/>
       <Ourproduct/>
+      <Feature/>
+      <Options/>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/homepage/Layout";
 import Footer from "@/components/homepage/Footer";
+import TopAds from "@/components/homepage/header/TopAds";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,10 +28,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`mx-8 space-y-4 md:mx-33 max-w-[1440px] ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`max-w-[1440px] ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <TopAds/>
+        <section className="mx-8 space-y-4 md:mx-33 " >
         <Layout/>
         {children}
+        </section>
+        
         <Footer/>
       </body>
     </html>

@@ -30,7 +30,7 @@ function Ourproduct() {
   return (
     <div>
       <OurTop/>
-      <div className='relative w-full h-full'>
+      <div className='relative w-full h-full '>
         <div className="absolute inset-0 flex justify-end gap-2 items-start m-auto right-0 z-10 -top-10 md:-top-14" >
                 <button
                 onClick={scrollNext}
@@ -109,6 +109,9 @@ function Ourproduct() {
                 ))}
                 
             </div>
+        </div>
+        <div className='flex items-center justify-center'>
+          <p className='category-btn w-fit mt-10 lg:mt-16'>View All Products</p>
         </div>
       </div>
     </div>
