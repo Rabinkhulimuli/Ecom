@@ -5,11 +5,15 @@ import { IoIosArrowForward } from 'react-icons/io'
 export default function Leftfirst() {
   return (
     <div
-    className='hidden  max-h-86 md:flex flex-col gap-4 border-r-2 pr-4 md:mr-4 lg:mr-10'
+    className=' md:mr-4 lg:mr-10'
     >
-      {categoryArray.map((eh,index)=> <p key={index}
-      className=' capitalize text-nowrap font-semibold flex items-center justify-between gap-4 max-w-50 w-full '
+       <h2 className="text-2xl sm:hidden font-semibold mb-6 text-center w-full bg-blue-900/10 px-1 shadow-lg rounded-sm">Our Collections</h2>
+       <div className=' '>
+        {categoryArray.map((eh,index)=> <p key={index}
+      className='link-style2 capitalize text-nowrap  sm:max-w-50 w-full '
       > {eh}{index ==0||index==1 ?<IoIosArrowForward/>:""} </p>)}
+       </div>
+      
     </div>
   )
 }

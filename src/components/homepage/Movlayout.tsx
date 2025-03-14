@@ -12,7 +12,7 @@ import { TbMenu2 } from "react-icons/tb";
 function Movlayout() {
   const [active, setActive] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const {data:session,status}=useSession()
+  const { data: session, status } = useSession();
   useEffect(() => {
     if (active) {
       if (videoRef.current) {
@@ -22,7 +22,7 @@ function Movlayout() {
     }
   }, [active]);
   const handleMenu = () => {
-    console.log("clicked")
+    console.log("clicked");
     setActive(!active);
   };
   return (
@@ -36,18 +36,18 @@ function Movlayout() {
         } top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen border-l-2 `}
       >
         <div className={`relative bg-green-300 `}>
-        <video
-          ref={videoRef}
-          className={`fixed top-0 right-0 w-full h-full object-cover
+          <video
+            ref={videoRef}
+            className={`fixed top-0 right-0 w-full h-full object-cover
           } `}
-          playsInline={true}
-          webkit-playsinline="true"
-          preload="auto"
-          muted={true}
-        >
-          <source src="/nav/vid1.mp4" type="video/mp4" />
-        </video>
-      </div>
+            playsInline={true}
+            webkit-playsinline="true"
+            preload="auto"
+            muted={true}
+          >
+            <source src="/nav/vid1.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div className=" w-full absolute top-2 z-1">
           <div className=" w-full h-68 sm:h-78  ">
             <Image
@@ -61,45 +61,67 @@ function Movlayout() {
         </div>
 
         <div className="absolute inset-0 m-auto z-30 ">
-          <div className={`h-12  text-2xl text-center pt-1 font-semibold shadow-2xl transition-all duration-900 delay-50 ease-in-out ${active?"w-[100%] bg-black":"w-[0%] bg-white"}`} >Wellcome to Xprive.com </div>
-          <div className="flex items-center justify-end px-2 md:px-12">
-          <button
-          onClick={handleMenu}
-          className="cursor-pointer  pt-4  md:py-7 md:pr-4">
-            <span className="relative flex size-6 ">
-              <RxCross2
-                className="md:w-6 md:h-6 relative size-6 inline-flex text-white "
-              />{" "}
-              <span className="absolute inline-flex h-full   w-full animate-ping rounded-full bg-[#ce1c60] "></span>
-            </span>
-          </button>
+          <div
+            className={`h-12  text-sm md:text-2xl text-center pt-3 md:pt-1 font-semibold shadow-2xl transition-all duration-900 delay-50 ease-in-out ${
+              active ? "w-[100%] bg-black" : "w-[0%] bg-white"
+            }`}
+          >
+            Wellcome to Xprive.com{" "}
           </div>
-          <div className="flex flex-col md:flex-row items-center md:pl-20 w-full  px-2 md:px-12 ">
-            <div className="flex md:flex-col w-full items-end justify-between  gap-2 px-4 md:px-0 md:pr-5">
-              <div className="" >
+          <div className="flex items-center justify-end px-2 md:px-12">
+            <button
+              onClick={handleMenu}
+              className="cursor-pointer  pt-4  md:py-7 md:pr-4"
+            >
+              <span className="relative flex size-6 ">
+                <RxCross2 className="md:w-6 md:h-6 relative size-6 inline-flex text-white " />{" "}
+                <span className="absolute inline-flex h-full   w-full animate-ping rounded-full bg-[#ce1c60] "></span>
+              </span>
+            </button>
+          </div>
+          <div className="absolute sm:relative top-51 sm:top-0 flex flex-col md:flex-row items-center md:pl-20 w-full  px-2 md:px-12 ">
+            <div className="flex md:flex-col  w-full items-end justify-between  gap-2 px-4 md:px-0 md:pr-5">
+              <div className="">
                 <GiSelfLove className="w-6 h-6" />
               </div>
               <div>
                 <FaShoppingCart className="w-6 h-6" />
               </div>
               <div>
-                {status==="authenticated"? (session?.user?.image?<Image className="rounded-full" src={`${session?.user?.image}`} alt="" width={20} height={20} /> : <CgProfile className="w-6 h-6" />):<Link href="/signup"><MdOutlineLogin className="w-6 h-6" /> </Link>
-                }
-                
+                {status === "authenticated" ? (
+                  session?.user?.image ? (
+                    <Image
+                      className="rounded-full"
+                      src={`${session?.user?.image}`}
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <CgProfile className="w-6 h-6" />
+                  )
+                ) : (
+                  <Link href="/signup">
+                    <MdOutlineLogin className="w-6 h-6" />{" "}
+                  </Link>
+                )}
               </div>
             </div>
           </div>
           <div className="w-full text-center mt-38 sm:mt-24">
             <p className="text-xl flex flex-col backdrop-blur-sm md:text-2xl font-semibold mb-4  ">
-              <span className="" >{session?.user?.name || "Next Xen Appo"}</span>
-            <span className="text-xs">{session?.user?.email} </span>
+              <span className="">{session?.user?.name || "Next Xen Appo"}</span>
+              <span className="text-xs">{session?.user?.email} </span>
             </p>
             <hr />
           </div>
           <div className="flex flex-col justify-start  w-full px-2 md:px-12">
-            <h3 className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
+            <Link
+              href="/"
+              className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full"
+            >
               Home
-            </h3>
+            </Link>
             <h3 className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
               Contact
             </h3>
@@ -109,7 +131,6 @@ function Movlayout() {
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

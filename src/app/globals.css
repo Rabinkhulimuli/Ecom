@@ -142,3 +142,6 @@
 .category-btn{
   @apply  font-semibold text-white bg-[#DB4444] rounded-lg  px-6 lg:px-12 py-2 lg:py-4
 }
+.link-style2{
+  @apply flex items-center gap-4 py-1 transition-all duration-700 cursor-pointer font-semibold hover:translate-x-4 px-3 rounded-xs hover:text-gray-900 ease-in-out  hover:bg-gray-200 
+}
