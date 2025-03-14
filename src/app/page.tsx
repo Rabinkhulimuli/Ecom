@@ -8,7 +8,12 @@ import Ourproduct from "@/components/homepage/product/Ourproduct";
 import CarolTop from "@/components/homepage/second/CarolTop";
 import SeCarousel from "@/components/homepage/second/SeCarousel";
 import Options from "@/components/homepage/subfooter/Options";
-
+import { Metadata } from "next";
+export const metadata:Metadata={
+  title:"Xprive.com",
+  description:"Best luxury shop where items are made in  hell",
+  keywords:"Luxury xprive xeron e-commerse-Website expensive"
+}
 export default function Home() {
   return (
     <div className="space-y-18 md:space-y-35">

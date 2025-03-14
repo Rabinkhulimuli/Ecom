@@ -7,11 +7,14 @@ import Movlayout from "./Movlayout";
 import Image from "next/image";
 import * as motion from "motion/react-client"
 import {useScroll, useTransform} from "framer-motion"
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 function Layout() {
   const {scrollYProgress}= useScroll()
   const scale=useTransform(scrollYProgress,[0,0.5],[1,0.1])
   const opacity=useTransform(scrollYProgress,[0,0.6],[1,0])
   const backgroundColor=useTransform(scrollYProgress,[0,0.1],["#0000","#fc0388"])
+  const {data:session,status}=useSession()
   return (
     <div className="  ">
       <div className="flex my-1 sm:my-4  items-center justify-between text-lg">
@@ -43,9 +46,9 @@ function Layout() {
             <div>
               <h2 className="hidden lg:block">About</h2>
             </div>
-            <div>
-              <h2 className="hidden lg:block text-nowrap">Sign Up</h2>
-            </div>
+            {status!=="authenticated"&& <div>
+              <Link href="/signup" className="hidden lg:block text-nowrap">Sign Up</Link>
+            </div>}
           </div>
         </div>
         <div className="flex items-center justify-between gap-6">
@@ -66,6 +69,9 @@ function Layout() {
             </div>
             <div>
               <FaShoppingCart className="w-8 h-8" />
+            </div>
+            <div>
+                {(session?.user?.image&&<Image className="rounded-full" src={`${session?.user?.image}`} alt="" width={32} height={32} />)}
             </div>
           </div>
         </div>

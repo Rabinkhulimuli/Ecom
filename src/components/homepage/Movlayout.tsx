@@ -1,5 +1,8 @@
 "use client";
+import { useSession } from "next-auth/react";
+import { CgProfile } from "react-icons/cg";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiSelfLove } from "react-icons/gi";
@@ -9,6 +12,7 @@ import { TbMenu2 } from "react-icons/tb";
 function Movlayout() {
   const [active, setActive] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const {data:session,status}=useSession()
   useEffect(() => {
     if (active) {
       if (videoRef.current) {
@@ -27,7 +31,7 @@ function Movlayout() {
         <TbMenu2 className="w-8 h-8" />
       </div>
       <div
-        className={`fixed  max-w-1/2 z-50 w-full mx-auto text-[#ffa500] transition-transform ease-in-out  duration-800 ${
+        className={`fixed  max-w-1/2  z-50 w-full mx-auto text-[#ffa500] transition-transform ease-in-out  duration-800 ${
           active ? "translate-x-0" : "translate-x-full "
         } top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen border-l-2 `}
       >
@@ -44,8 +48,8 @@ function Movlayout() {
           <source src="/nav/vid1.mp4" type="video/mp4" />
         </video>
       </div>
-        <div className=" w-full absolute z-1">
-          <div className=" w-full h-78  ">
+        <div className=" w-full absolute top-2 z-1">
+          <div className=" w-full h-68 sm:h-78  ">
             <Image
               className=" w-full h-full object-contain  backdrop-blur-xs backdrop-hue-rotate-15"
               src="/companyProducts/company-main.png"
@@ -57,6 +61,7 @@ function Movlayout() {
         </div>
 
         <div className="absolute inset-0 m-auto z-30 ">
+          <div className={`h-12  text-2xl text-center pt-1 font-semibold shadow-2xl transition-all duration-900 delay-50 ease-in-out ${active?"w-[100%] bg-black":"w-[0%] bg-white"}`} >Wellcome to Xprive.com </div>
           <div className="flex items-center justify-end px-2 md:px-12">
           <button
           onClick={handleMenu}
@@ -78,13 +83,16 @@ function Movlayout() {
                 <FaShoppingCart className="w-6 h-6" />
               </div>
               <div>
-                <MdOutlineLogin className="w-6 h-6" />
+                {status==="authenticated"? (session?.user?.image?<Image className="rounded-full" src={`${session?.user?.image}`} alt="" width={20} height={20} /> : <CgProfile className="w-6 h-6" />):<Link href="/signup"><MdOutlineLogin className="w-6 h-6" /> </Link>
+                }
+                
               </div>
             </div>
           </div>
-          <div className="w-full text-center mt-24">
-            <p className="text-xl md:text-2xl font-semibold mb-4 ">
-              Xen Next Appo
+          <div className="w-full text-center mt-38 sm:mt-24">
+            <p className="text-xl flex flex-col backdrop-blur-sm md:text-2xl font-semibold mb-4  ">
+              <span className="" >{session?.user?.name || "Next Xen Appo"}</span>
+            <span className="text-xs">{session?.user?.email} </span>
             </p>
             <hr />
           </div>
