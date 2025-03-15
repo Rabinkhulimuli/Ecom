@@ -27,7 +27,7 @@ export const carouselArray=[
 export const secProduct=[
     {
         id:0,
-        discount:0,
+        discount:20,
         title:"Havit HV-G92 Gamepad",
         price:120,
         NumStar:0,
@@ -37,7 +37,7 @@ export const secProduct=[
     {
         id:1,
         discount:0,
-        title:"Havit HV-G92 Gamepad",
+        title:"Havit",
         price:120,
         NumStar:0,
         totalStar:0,
@@ -45,8 +45,8 @@ export const secProduct=[
     },
     {
         id:2,
-        discount:0,
-        title:"Havit HV-G92 Gamepad",
+        discount:30,
+        title:"Havit Gamepad",
         price:120,
         NumStar:0,
         totalStar:0,
@@ -55,7 +55,7 @@ export const secProduct=[
     {
         id:3,
         discount:0,
-        title:"Havit HV-G92 Gamepad",
+        title:"Havit HV-G92 new model Gamepad",
         price:120,
         NumStar:4,
         totalStar:0,
@@ -72,7 +72,7 @@ export const secProduct=[
     },
     {
         id:5,
-        discount:0,
+        discount:10,
         title:"Havit HV-G92 Gamepad",
         price:120,
         NumStar:3,

@@ -78,16 +78,16 @@ function Layout() {
             </div>
           </div>
           <div className="hidden xl:flex items-center justify-between gap-4">
-            <div  >
+            <Link href="/wishlist"  >
               <GiSelfLove className="w-8 h-8" />
-            </div>
-            <div className="relative">
+            </Link>
+            <Link href="/cart" className="relative">
               <FaShoppingCart className="w-8 h-8" />
               <div className="absolute -top-1 -right-1">
               <Notification/>
               </div>
               
-            </div>
+            </Link>
             <div className="relative">
               <div>
               {(session?.user?.image&&<Image onClick={handleDropdown} className="rounded-full cursor-pointer" src={`${session?.user?.image}`} alt="" width={32} height={32} />)}

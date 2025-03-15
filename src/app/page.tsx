@@ -17,9 +17,9 @@ export const metadata:Metadata={
 }
 export default function Home() {
   return (
-    <div className="space-y-18 md:space-y-35">
+    <div className="space-y-14 md:space-y-35">
 
-      <div className="flex py-10 h-fit ">
+      <div className="flex h-fit ">
         <div className="hidden lg:flex justify-center items-center border-r-2 pr-4">
           <Leftfirst />
         </div>

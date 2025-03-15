@@ -68,10 +68,10 @@ function Movlayout() {
           >
             Wellcome to Xprive.com{" "}
           </div>
-          <div className="flex items-center justify-end px-2 md:px-12">
+          <div className="flex items-center justify-end px-2 md:px-5">
             <button
               onClick={handleMenu}
-              className="cursor-pointer  pt-4  md:py-7 md:pr-4"
+              className="cursor-pointer  pt-4  md:py-7 pr-1 md:pr-4"
             >
               <span className="relative flex size-6 ">
                 <RxCross2 className="md:w-6 md:h-6 relative size-6 inline-flex text-white " />{" "}
@@ -79,30 +79,30 @@ function Movlayout() {
               </span>
             </button>
           </div>
-          <div className="absolute sm:relative top-51 sm:top-0 flex flex-col md:flex-row items-center md:pl-20 w-full  px-2 md:px-12 ">
-            <div className="flex md:flex-col  w-full items-end justify-between  gap-2 px-4 md:px-0 md:pr-5">
-              <div className="">
-                <GiSelfLove className="w-6 h-6" />
-              </div>
-              <div>
-                <FaShoppingCart className="w-6 h-6" />
-              </div>
+          <div className="absolute sm:relative top-28 sm:top-7 flex flex-col md:flex-row items-center md:pl-20 w-full  px-2 md:px-4 ">
+            <div className="flex flex-col  w-full items-end justify-between  gap-2 md:gap-4 px-1 md:px-0 md:pr-5">
+              <Link href="/wishlist" className="">
+                <GiSelfLove className="w-6 h-6 md:w-8 md:h-8 " />
+              </Link>
+              <Link href="/cart">
+                <FaShoppingCart className="w-6 h-6 md:w-8 md:h-8 " />
+              </Link>
               <div>
                 {status === "authenticated" ? (
                   session?.user?.image ? (
                     <Image
-                      className="rounded-full"
+                      className="rounded-full w-6 h-6 md:w-8 md:h-8 "
                       src={`${session?.user?.image}`}
                       alt=""
                       width={20}
                       height={20}
                     />
                   ) : (
-                    <CgProfile className="w-6 h-6" />
+                    <CgProfile className="w-6 h-6 md:w-8 md:h-8 " />
                   )
                 ) : (
                   <Link href="/signup">
-                    <MdOutlineLogin className="w-6 h-6" />{" "}
+                    <MdOutlineLogin className="w-6 h-6 md:w-8 md:h-8 " />{" "}
                   </Link>
                 )}
               </div>

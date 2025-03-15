@@ -30,7 +30,10 @@ export default function RootLayout({
           <TopAds />
           <section className="mx-8 space-y-4 md:mx-33 ">
             <Layout />
-            {children}
+            <div className=" mt-10 sm:mt-24">
+               {children}
+            </div>
+           
           </section>
 
           <Footer />
