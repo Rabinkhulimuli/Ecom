@@ -13,12 +13,15 @@ function Movlayout() {
   const [active, setActive] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { data: session, status } = useSession();
+  const[videoLoaded,setVideoLoaded]=useState(false)
   useEffect(() => {
     if (active) {
       if (videoRef.current) {
         videoRef.current.currentTime = 0;
         videoRef.current.play();
       }
+    }else{
+      videoRef?.current?.pause()
     }
   }, [active]);
   const handleMenu = () => {
@@ -31,27 +34,28 @@ function Movlayout() {
         <TbMenu2 className="w-8 h-8" />
       </div>
       <div
-        className={`fixed  max-w-1/2  z-50 w-full mx-auto text-[#ffa500] transition-transform ease-in-out  duration-800 ${
+        className={`fixed  max-w-[50%] ${videoLoaded?"bg-white border-l-black border-l-4 ":"bg-transparent border-l-transparent border-l-0 "}  z-50 w-full mx-auto text-[#ffa500] transition-transform ease-in-out  duration-800 ${
           active ? "translate-x-0" : "translate-x-full "
-        } top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen border-l-2 `}
+        } top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen  `}
       >
-        <div className={`relative bg-green-300 `}>
-          <video
+        <div className={`relative `}>
+          
+       <video
             ref={videoRef}
             className={`fixed top-0 right-0 w-full h-full object-cover
           } `}
-            playsInline={true}
-            webkit-playsinline="true"
+            playsInline
             preload="auto"
             muted={true}
+            onLoadedData={()=> setVideoLoaded(true)}
           >
             <source src="/nav/vid1.mp4" type="video/mp4" />
-          </video>
+          </video> 
         </div>
         <div className=" w-full absolute top-2 z-1">
-          <div className=" w-full h-68 sm:h-78  ">
+          <div className=" w-full h-68 sm:h-78   ">
             <Image
-              className=" w-full h-full object-contain  backdrop-blur-xs backdrop-hue-rotate-15"
+              className=" pl-6 w-full h-full object-contain  backdrop-blur-xs backdrop-hue-rotate-15"
               src="/companyProducts/company-main.png"
               alt="company logo"
               width={800}
@@ -62,7 +66,8 @@ function Movlayout() {
 
         <div className="absolute inset-0 m-auto z-30 ">
           <div
-            className={`h-12  text-sm md:text-2xl text-center pt-3 md:pt-1 font-semibold shadow-2xl transition-all duration-900 delay-50 ease-in-out ${
+            style={{ scrollbarWidth: "none" }}
+            className={`h-12 overflow-x-hidden text-nowrap text-sm md:text-2xl text-center pt-3 md:pt-1 font-semibold shadow-2xl transition-all duration-900 delay-50 ease-in-out ${
               active ? "w-[100%] bg-black" : "w-[0%] bg-white"
             }`}
           >
@@ -90,13 +95,15 @@ function Movlayout() {
               <div>
                 {status === "authenticated" ? (
                   session?.user?.image ? (
-                    <Image
-                      className="rounded-full w-6 h-6 md:w-8 md:h-8 "
-                      src={`${session?.user?.image}`}
-                      alt=""
-                      width={20}
-                      height={20}
-                    />
+                    <Link href="/account/myaccount">
+                      <Image
+                        className="rounded-full w-6 h-6 md:w-8 md:h-8 "
+                        src={`${session?.user?.image}`}
+                        alt=""
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
                   ) : (
                     <CgProfile className="w-6 h-6 md:w-8 md:h-8 " />
                   )
@@ -125,9 +132,9 @@ function Movlayout() {
             <h3 className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
               Contact
             </h3>
-            <h3 className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
+            <Link href="/about" className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
               About
-            </h3>
+            </Link>
           </div>
         </div>
       </div>

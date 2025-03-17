@@ -17,7 +17,7 @@ function Spage() {
   return (
     <div className='flex flex-col gap-8 xl:gap-32 lg:flex-row md:justify-between mt-8 md:mt-15'>
         <div className='relative min-w-[200px] w-full min-h-[400px] max-w-[805px] max-h-[780px]'>
-            <Image className='w-full h-full object-cover' src="/signup/cart.png" alt=" cart" fill  />
+            <Image className='w-full h-full object-cover' src="/signup/cart.png" alt=" cart" fill priority />
         </div>
       <div className='w-full flex items-center justify-center'>
 
