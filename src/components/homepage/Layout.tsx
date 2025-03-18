@@ -13,6 +13,7 @@ import ProfileDropdown from "./header/ProfileDropdown";
 import Notification from "../cart/Notification";
 import { usePathname } from "next/navigation";
 function Layout() {
+  const[showNav,setShowNav]=useState(true)
   const [active, setActive] = useState(false);
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.1]);
@@ -33,10 +34,24 @@ function Layout() {
       }, 60000);
     }
   }, [active]);
+
+  useEffect(()=> {
+    let lastScrollY=0
+    const handleScroll=()=> {
+      if(window.scrollY > lastScrollY){
+        setShowNav(false)
+      }else{
+        setShowNav(true)
+      }
+      lastScrollY= window.scrollY <= 0 ? 0 : window.scrollY
+    }
+ 
+    window.addEventListener("scroll",handleScroll)
+    return ()=> window.removeEventListener("scroll",handleScroll)
+  },[])
   const pathname = usePathname();
-  console.log(pathname)
   return (
-    <div className="">
+    <div className={`sticky z-20 w-full transition-all duration-700 ease-in-out ${!showNav?"opacity-0 invisible":"opacity-100 visible"}  inset-0 top-0 bg-white h-fit`}>
       <div className="flex my-1 sm:my-4  items-center justify-between text-lg">
         <div className="flex items-center justify-between xl:gap-40 2xl:gap-48 ">
           <div className="relative w-14 ">
@@ -53,6 +68,7 @@ function Layout() {
             </Link>
 
             {pathname === "/" ? (
+              <div>
               <motion.div
                 initial={{ scale: 1 }}
                 whileTap={{ scale: 1.5 }}
@@ -66,8 +82,17 @@ function Layout() {
                   height={44}
                 />
               </motion.div>
+              <div className="absolute -top-5.5 opacity-40 md:-left-1 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full ">
+                <Image
+                  src="/companyProducts/com-logo.png"
+                  alt=""
+                  width={44}
+                  height={44}
+                />
+              </div>
+              </div>
             ) : (
-              <div className="absolute -top-5  md:-left-1 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full ">
+              <div className="absolute -top-5.5  md:-left-1 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full ">
                 <Image
                   src="/companyProducts/com-logo.png"
                   alt=""
@@ -84,7 +109,7 @@ function Layout() {
               </Link>
             </div>
             <div>
-              <h2 className="hidden lg:block">Contact</h2>
+              <Link href="/contact" className="hidden lg:block">Contact</Link>
             </div>
             <div>
               <Link href="/about" className="hidden lg:block">

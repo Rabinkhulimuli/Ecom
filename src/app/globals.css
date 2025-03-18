@@ -152,3 +152,6 @@
   @apply lg:pl-6 tracking-tight text-xs sm:text-[16px] capitalize  space-y-1 sm:space-y-2   flex flex-col  justify-center text-nowrap
           
 }
+.bg-url{
+  background-image:url("/error/404.png"); background-repeat:no-repeat; width: full; height:full; 
+}
