@@ -33,7 +33,9 @@ const MyInputText: React.FC<MyInputTextProps> = ({ label, ...props }) => {
 function MyAccRight() {
   return (
     <div>
-      <p className="text-lg  font-semibold capitalize my-4">edit your profile</p>
+      <p className="text-lg  font-semibold capitalize my-4">
+        edit your profile
+      </p>
       <Formik
         initialValues={{
           firstName: "",
@@ -101,8 +103,10 @@ function MyAccRight() {
             placeholder="Confirm Password"
           />
           <div>
-            <button className="px-4 sm:px-8 sm:py-2 cursor-pointer">Cancel</button>
-            <button className="category-btn " >Save changes</button>
+            <button className="px-4 sm:px-8 sm:py-2 cursor-pointer">
+              Cancel
+            </button>
+            <button className="category-btn ">Save changes</button>
           </div>
         </Form>
       </Formik>

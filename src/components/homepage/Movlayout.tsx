@@ -13,45 +13,45 @@ function Movlayout() {
   const [active, setActive] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { data: session, status } = useSession();
-  const[videoLoaded,setVideoLoaded]=useState(false)
+  const [videoLoaded, setVideoLoaded] = useState(false);
   useEffect(() => {
     if (active) {
       if (videoRef.current) {
         videoRef.current.currentTime = 0;
         videoRef.current.play();
       }
-    }else{
-      videoRef?.current?.pause()
+    } else {
+      videoRef?.current?.pause();
     }
   }, [active]);
-  useEffect(()=> {
-    const video=videoRef.current
-    if(!video){
-      return
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
     }
-    const handleCanplaythrough=()=> {
-      setVideoLoaded(true)
-    }
-    video.addEventListener("canplaythrough",handleCanplaythrough)
-    return ()=> video.removeEventListener("canplaythrough",handleCanplaythrough)
-  })
+    const handleCanplaythrough = () => {
+      setVideoLoaded(true);
+    };
+    video.addEventListener("canplaythrough", handleCanplaythrough);
+    return () =>
+      video.removeEventListener("canplaythrough", handleCanplaythrough);
+  });
   const handleMenu = () => {
     setActive(!active);
   };
- 
+
   return (
     <div className={`relative w-full `}>
       <div onClick={handleMenu} className={``}>
         <TbMenu2 className="w-8 h-8" />
       </div>
       <div
-        className={`fixed  max-w-[50%] ${!videoLoaded?"bg-white border-l-black border-l-4 ":"bg-transparent border-l-transparent border-l-0 "}  z-50 w-full mx-auto text-[#ffa500] transition-transform ease-in-out  duration-800 ${
+        className={`fixed  max-w-[50%] ${!videoLoaded ? "bg-white border-l-black border-l-4 " : "bg-transparent border-l-transparent border-l-0 "}  z-50 w-full mx-auto text-[#ffa500] transition-transform ease-in-out  duration-800 ${
           active ? "translate-x-0" : "translate-x-full "
         } top-0 right-0 flex flex-col gap-4 items-center justify-start text-lg  h-screen  `}
       >
         <div className={`relative `}>
-          
-       <video
+          <video
             ref={videoRef}
             className={`fixed top-0 right-0 w-full h-full object-cover
           } `}
@@ -60,7 +60,7 @@ function Movlayout() {
             muted
           >
             <source src="/nav/vid1.mp4" type="video/mp4" />
-          </video> 
+          </video>
         </div>
         <div className=" w-full absolute top-2 z-1">
           <div className=" w-full h-68 sm:h-78  animate-pulse  ">
@@ -78,7 +78,9 @@ function Movlayout() {
           <div
             style={{ scrollbarWidth: "none" }}
             className={`h-12 overflow-hidden text-nowrap delay-300 text-sm md:text-2xl text-center pt-3 md:pt-1 font-semibold shadow-2xl transition-all duration-900 delay-50 ease-in-out ${
-              active ? "translate-y-0 bg-black opacity-100 " : "-translate-y-full bg-white opacity-0"
+              active
+                ? "translate-y-0 bg-black opacity-100 "
+                : "-translate-y-full bg-white opacity-0"
             }`}
           >
             Wellcome to Xprive.com{" "}
@@ -90,7 +92,6 @@ function Movlayout() {
             >
               <span className="relative flex">
                 <RxCross2 className="w-6 h-6 md:w-8 md:h-8 relative backdrop-blur-3xl border-blue-700 inline-flex text-white border-2 rounded-full " />{" "}
-    
               </span>
             </button>
           </div>
@@ -99,13 +100,13 @@ function Movlayout() {
               <Link href="/wishlist" onClick={handleMenu} className="">
                 <GiSelfLove className="w-6 h-6 md:w-8 md:h-8 " />
               </Link>
-              <Link href="/cart"  onClick={handleMenu}>
+              <Link href="/cart" onClick={handleMenu}>
                 <FaShoppingCart className="w-6 h-6 md:w-8 md:h-8 " />
               </Link>
               <div>
                 {status === "authenticated" ? (
                   session?.user?.image ? (
-                    <Link href="/account/myaccount"  onClick={handleMenu}>
+                    <Link href="/account/myaccount" onClick={handleMenu}>
                       <Image
                         className="rounded-full w-6 h-6 md:w-8 md:h-8 "
                         src={`${session?.user?.image}`}
@@ -118,7 +119,7 @@ function Movlayout() {
                     <CgProfile className="w-6 h-6 md:w-8 md:h-8 " />
                   )
                 ) : (
-                  <Link href="/signup"  onClick={handleMenu}>
+                  <Link href="/signup" onClick={handleMenu}>
                     <MdOutlineLogin className="w-6 h-6 md:w-8 md:h-8 " />{" "}
                   </Link>
                 )}
@@ -140,10 +141,17 @@ function Movlayout() {
             >
               Home
             </Link>
-            <Link href="/contact" className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
+            <Link
+              href="/contact"
+              className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full"
+            >
               Contact
             </Link>
-            <Link href="/about"  onClick={handleMenu} className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full">
+            <Link
+              href="/about"
+              onClick={handleMenu}
+              className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full"
+            >
               About
             </Link>
           </div>

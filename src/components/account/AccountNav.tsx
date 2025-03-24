@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function AccountNav() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>;
 }
 
-export default AccountNav
+export default AccountNav;

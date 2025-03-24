@@ -8,33 +8,45 @@ import AutoPlay from "embla-carousel-autoplay";
 import { GiBleedingEye, GiStaryu } from "react-icons/gi";
 import { RxDoubleArrowRight } from "react-icons/rx";
 function SeCarousel() {
-  const[alignCaro,setAlignCaro]=useState<"start"|"center">("start")
+  const [alignCaro, setAlignCaro] = useState<"start" | "center">("start");
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align:alignCaro },
-    [AutoPlay({stopOnInteraction:true,stopOnMouseEnter:true,delay:5000})]
+    { loop: true, align: alignCaro },
+    [
+      AutoPlay({
+        stopOnInteraction: true,
+        stopOnMouseEnter: true,
+        delay: 5000,
+      }),
+    ],
   );
-  useEffect(()=> {
-    const updateAlignment=()=> {
-      setAlignCaro(window.innerWidth <500?"center":"start")
-    }
-    updateAlignment()
-    window.addEventListener("resize",updateAlignment)
-    return ()=> window.removeEventListener("resize",updateAlignment)
-  },[])
-const scrollNext=useCallback(()=> emblaApi && emblaApi.scrollNext(),[emblaApi])
-const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
+  useEffect(() => {
+    const updateAlignment = () => {
+      setAlignCaro(window.innerWidth < 500 ? "center" : "start");
+    };
+    updateAlignment();
+    window.addEventListener("resize", updateAlignment);
+    return () => window.removeEventListener("resize", updateAlignment);
+  }, []);
+  const scrollNext = useCallback(
+    () => emblaApi && emblaApi.scrollNext(),
+    [emblaApi],
+  );
+  const scrollPrev = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
+    [emblaApi],
+  );
   return (
     <div className="relative">
-      <div className="absolute inset-0 flex justify-end gap-2 items-start m-auto right-0 z-10 -top-10 md:-top-14" >
+      <div className="absolute inset-0 flex justify-end gap-2 items-start m-auto right-0 z-10 -top-10 md:-top-14">
         <button
-        onClick={scrollNext}
-        className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
+          onClick={scrollNext}
+          className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
         >
           <RxDoubleArrowRight className=" w-full rotate-180 md:text-2xl" />
         </button>
         <button
-        onClick={scrollPrev}
-        className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
+          onClick={scrollPrev}
+          className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
         >
           <RxDoubleArrowRight className=" w-full  md:text-2xl" />
         </button>
@@ -48,9 +60,7 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
               className="border-white border-4 flex-shrink-0  min-w-67 group"
             >
               <div className="relative flex py-10 min-w-67 h-62 overflow-hidden justify-center bg-gray-100">
-                <div
-                
-                className="max-w-43 max-h-38">
+                <div className="max-w-43 max-h-38">
                   <Image
                     className="w-full h-full object-cover"
                     src={eh.image}
@@ -75,7 +85,11 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
                 <h2>{eh.title} </h2>
                 <p className="text-[#DB4444]">${eh.price} </p>
                 {eh.discount > 0 && (
-                  <p>{(eh.price-(eh.price * eh.discount) / 100).toFixed(2)} </p>
+                  <p>
+                    {(eh.price - (eh.price * eh.discount) / 100).toFixed(
+                      2,
+                    )}{" "}
+                  </p>
                 )}
 
                 <div className="flex items-center gap-1 ">
@@ -95,12 +109,8 @@ const scrollPrev=useCallback(()=> emblaApi && emblaApi.scrollPrev(),[emblaApi])
           ))}
         </div>
       </div>
-      <div
-      className="flex items-center  justify-center"
-      >
-        <p
-        className="category-btn mt-10 lg:mt-16"
-        >View All Products</p>
+      <div className="flex items-center  justify-center">
+        <p className="category-btn mt-10 lg:mt-16">View All Products</p>
       </div>
     </div>
   );

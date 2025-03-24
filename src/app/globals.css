@@ -124,34 +124,36 @@
     @apply bg-background text-foreground;
   }
 }
-.button-b-white{
-  @apply flex items-center gap-2 border-white opacity-90 border text-sm lg:text-lg px-2 lg:px-4 py-1 lg:py-2 rounded-2xl  bg-black
+.button-b-white {
+  @apply flex items-center gap-2 border-white opacity-90 border text-sm lg:text-lg px-2 lg:px-4 py-1 lg:py-2 rounded-2xl  bg-black;
 }
-.button-o-c{
-  @apply flex items-center gap-2  text-sm lg:text-lg px-4 py-2 rounded-2xl  font-semibold bg-[#DB4444]
+.button-o-c {
+  @apply flex items-center gap-2  text-sm lg:text-lg px-4 py-2 rounded-2xl  font-semibold bg-[#DB4444];
 }
-.category-p{
-  @apply text-xl md:text-4xl font-semibold
+.category-p {
+  @apply text-lg sm:text-xl md:text-4xl font-semibold;
 }
-.category-outer-div{
-  @apply flex flex-col gap-2 lg:gap-6
+.category-outer-div {
+  @apply flex flex-col gap-2 lg:gap-6;
 }
-.category-2outer-div{
-  @apply flex flex-col gap-2 lg:flex-row justify-between md:max-w-[50%] lg:items-end
+.category-2outer-div {
+  @apply flex flex-col gap-2 lg:flex-row justify-between md:max-w-[50%] lg:items-end;
 }
-.category-btn{
-  @apply  font-semibold text-white bg-[#DB4444] rounded-lg  px-6 lg:px-12 py-2 lg:py-4 cursor-pointer
+.category-btn {
+  @apply text-nowrap  font-semibold text-white bg-[#DB4444] rounded-lg  px-6 lg:px-12 py-2 lg:py-4 cursor-pointer;
 }
-.link-style2{
-  @apply flex items-center gap-4 py-1 transition-all duration-700 cursor-pointer font-semibold hover:translate-x-4 px-3 rounded-xs hover:text-gray-900 ease-in-out  hover:bg-gray-200 
+.link-style2 {
+  @apply flex items-center gap-4 py-1 transition-all duration-700 cursor-pointer font-semibold hover:translate-x-4 px-3 rounded-xs hover:text-gray-900 ease-in-out  hover:bg-gray-200;
 }
-.discount-text{
-  @apply   text-[10px]  lg:text-sm  rounded-md px-2 py-0.5 lg:py-1 lg:px-3 text-white bg-[#DB4444]
+.discount-text {
+  @apply text-[10px]  lg:text-sm  rounded-md px-2 py-0.5 lg:py-1 lg:px-3 text-white bg-[#DB4444];
 }
-.drop-down{
-  @apply lg:pl-6 tracking-tight text-xs sm:text-[16px] capitalize  space-y-1 sm:space-y-2   flex flex-col  justify-center text-nowrap
-          
+.drop-down {
+  @apply lg:pl-6 tracking-tight text-xs sm:text-[16px] capitalize  space-y-1 sm:space-y-2   flex flex-col  justify-center text-nowrap;
 }
-.bg-url{
-  background-image:url("/error/404.png"); background-repeat:no-repeat; width: full; height:full; 
+.bg-url {
+  background-image: url("/error/404.png");
+  background-repeat: no-repeat;
+  width: full;
+  height: full;
 }

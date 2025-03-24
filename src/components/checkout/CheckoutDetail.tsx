@@ -6,35 +6,38 @@ function CheckoutDetail() {
   return (
     <div className="w-full">
       <div>
-        <div style={{scrollbarWidth:"thin",scrollbarColor:"#db4444 #f5f5f5"}} className="space-y-8 overflow-y-auto max-h-37  border-b-1 ">
-            {secProduct.map((eh) => (
-                        <div
-                          className="flex gap-4 items-center justify-between lg:text-lg   max-h-14  rounded-sm"
-                          key={eh.id}
-                        >
-                          <span className="">
-                            {" "}
-                            <span className="flex items-center">
-                              <span className="max-w-14 max-h-14">
-                                <Image
-                                  className="w-full h-full"
-                                  src={eh.image}
-                                  alt=""
-                                  width={100}
-                                  height={100}
-                                />
-                              </span>
-                              <span
-                                style={{ scrollbarWidth: "none" }}
-                                className="text-sm overflow-y-auto max-h-12 leading-4  lg:max-h-25 md:text-[16px] pl-2 lg:pl-5 "
-                              >
-                                {eh.title}{" "}
-                              </span>
-                            </span>{" "}
-                          </span>
-                          <span>${eh.price} </span>
-                        </div>
-                      ))}
+        <div
+          style={{ scrollbarWidth: "thin", scrollbarColor: "#db4444 #f5f5f5" }}
+          className="space-y-8 overflow-y-auto max-h-37  border-b-1 "
+        >
+          {secProduct.map((eh) => (
+            <div
+              className="flex gap-4 items-center justify-between lg:text-lg   max-h-14  rounded-sm"
+              key={eh.id}
+            >
+              <span className="">
+                {" "}
+                <span className="flex items-center">
+                  <span className="max-w-14 max-h-14">
+                    <Image
+                      className="w-full h-full"
+                      src={eh.image}
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </span>
+                  <span
+                    style={{ scrollbarWidth: "none" }}
+                    className="text-sm overflow-y-auto max-h-12 leading-4  lg:max-h-25 md:text-[16px] pl-2 lg:pl-5 "
+                  >
+                    {eh.title}{" "}
+                  </span>
+                </span>{" "}
+              </span>
+              <span>${eh.price} </span>
+            </div>
+          ))}
         </div>
         <div>
           <p className=" flex items-center justify-between border-b-2 capitalize py-4">
@@ -63,7 +66,12 @@ function CheckoutDetail() {
               <span>Bank</span>{" "}
             </span>
             <span>
-              <Image src="/stripe/card.jpg" alt="" width={200} height={28} />{" "}
+              <Image
+                src="/stripe/card.jpg"
+                alt=""
+                width={200}
+                height={28}
+              />{" "}
             </span>
           </label>
           <br />
@@ -88,8 +96,8 @@ function CheckoutDetail() {
             </button>
           </div>
           <button className="px-3 sm:px-6 text-nowrap w-fit   py-2 lg:px-12 md:py-4 border rounded-md font-semibold capitalize text-white bg-[#db4444]">
-              Place Order
-            </button>
+            Place Order
+          </button>
         </div>
       </div>
     </div>

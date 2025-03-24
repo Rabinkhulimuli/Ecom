@@ -7,6 +7,7 @@ function Card() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
+    watchDrag: true,
   });
 
   const scrollNext = useCallback(() => {
@@ -24,10 +25,7 @@ function Card() {
         <div className="flex  ">
           {/* Cards inside Embla Carousel */}
           {Array.from("aa").map((_, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 mx-auto w-full"
-            >
+            <div key={index} className="flex-shrink-0 mx-auto w-full">
               <div className=" mx-auto flex justify-center sm:gap-2 items-center w-full md:w-fit">
                 {[
                   {
@@ -42,7 +40,10 @@ function Card() {
                   },
                   { name: "Luffy", rank: "Chairman", image: "/anime/lufy.jpg" },
                 ].map((item, index) => (
-                  <div key={index} className="w-full pr-1 md:min-w-[150px] lg:min-w-[250px]  h-full ">
+                  <div
+                    key={index}
+                    className="w-full pr-1 md:min-w-[150px] lg:min-w-[250px]  h-full "
+                  >
                     <CardModel
                       name={item.name}
                       rank={item.rank}

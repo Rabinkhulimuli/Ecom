@@ -1,16 +1,15 @@
-import CompTop from '@/components/homepage/CompTop'
-import { secProduct } from '@/config/carouselRight'
-import Image from 'next/image'
-import React from 'react'
-import { IoMdHeartEmpty } from 'react-icons/io'
-import { IoCartOutline } from 'react-icons/io5'
+import CompTop from "@/components/homepage/CompTop";
+import { secProduct } from "@/config/carouselRight";
+import Image from "next/image";
+import React from "react";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
 
 function RelatedProduct() {
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <div className="flex items-center justify-between">
         <CompTop title={"Related Items"} desc={""} />
-        
       </div>
       <div className="grid w-full grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-2 lg:gap-y-14 items-center justify-between">
         {secProduct.slice(0, 4).map((eh) => (
@@ -65,7 +64,7 @@ function RelatedProduct() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default RelatedProduct
+export default RelatedProduct;

@@ -12,13 +12,22 @@ function Feature() {
       <div>
         <CompTop title={"Featured"} desc={"New Arrival"} />
       </div>
-      <div  className="flex flex-col xl:flex-row gap-2 ">
+      <div className="flex flex-col xl:flex-row gap-2 ">
         <div className="relative w-full  pl-4 py-12 flex items-end justify-end bg-black text-white">
           <div className="max-w-[500px]   ">
-            <Image className="w-full h-full " src={image1} alt="" width={500} height={600} />
+            <Image
+              className="w-full h-full "
+              src={image1}
+              alt=""
+              width={500}
+              height={600}
+            />
           </div>
           <div className="absolute space-y-2 md:space-y-4 bottom-8 left-8 ">
-            <FeatureTag title={"playstation 5"} desc={"Black and white PS5 comming out on sale."} />
+            <FeatureTag
+              title={"playstation 5"}
+              desc={"Black and white PS5 comming out on sale."}
+            />
           </div>
         </div>
         <div className="flex w-full h-full flex-col gap-2">

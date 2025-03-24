@@ -1,12 +1,12 @@
-import MyAccount from '@/components/account/MyAccount'
-import React from 'react'
+import MyAccount from "@/components/account/MyAccount";
+import React from "react";
 
 function Page() {
   return (
     <div>
-      <MyAccount/>
+      <MyAccount />
     </div>
-  )
+  );
 }
 
-export default Page
+export default Page;

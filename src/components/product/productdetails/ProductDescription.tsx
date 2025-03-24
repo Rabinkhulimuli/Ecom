@@ -15,7 +15,9 @@ function ProductDescription() {
     <div className="space-y-5 sm:space-y-6 w-fit xl:w-full max-h-[600px]">
       <div className="space-y-3 sm:space-y-4">
         <div className=" space-y-1">
-          <h2 className="text-xl sm:text-2xl font-semibold capitalize">havic</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold capitalize">
+            havic
+          </h2>
           <div className="flex gap-2 sm:gap-4 text-xs sm:text-sm capitalize">
             <div className="flex sm:gap-1  ">
               {Array.from({ length: 5 }).map((_, index) => (
@@ -119,7 +121,7 @@ function ProductDescription() {
         <div className="flex gap-4">
           <div className="flex border w-fit rounded-md">
             <div className="">
-            <CgMathMinus className="p-2 w-8 h-full sm:w-10 sm:h-11 cursor-pointer " />
+              <CgMathMinus className="p-2 w-8 h-full sm:w-10 sm:h-11 cursor-pointer " />
             </div>
             <p className="w-14 h-full sm:w-18 sm:h-11 border flex items-center justify-center text-xl">
               2

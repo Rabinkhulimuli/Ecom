@@ -12,8 +12,14 @@ const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
-      <label htmlFor={props.id || props.name} className="hidden" >{label} </label>
-      <input className="input-text bg-gray-300 w-full xl:w-fit  px-4 py-3 rounded-md" {...field} {...props} />
+      <label htmlFor={props.id || props.name} className="hidden">
+        {label}{" "}
+      </label>
+      <input
+        className="input-text bg-gray-300 w-full xl:w-fit  px-4 py-3 rounded-md"
+        {...field}
+        {...props}
+      />
       {meta.touched && meta.error ? (
         <div className="error">{meta.error} </div>
       ) : null}
@@ -39,19 +45,21 @@ function RightContact() {
       >
         <Form className="flex flex-col gap-4 md:gap-8 w-full items-end">
           <div className="flex w-full flex-col xl:flex-row gap-2">
-            <TextInput
-              type="text"
-              placeholder="Full Name"
-              name="fullName"
-            />
-                <div className="flex gap-2 w-full">
-                <TextInput name="email" type="email" placeholder="Email" />
-            <TextInput name="phone" type="tel" placeholder="Phone Number" />
-          
-                </div>
+            <TextInput type="text" placeholder="Full Name" name="fullName" />
+            <div className="flex gap-2 w-full">
+              <TextInput name="email" type="email" placeholder="Email" />
+              <TextInput name="phone" type="tel" placeholder="Phone Number" />
             </div>
-          <textarea  name="message" id="message" placeholder="Your Message" className="w-full h-40 px-4 rounded-md py-3 bg-gray-300"></textarea>
-        <button className="category-btn w-fit capitalize">send message</button>
+          </div>
+          <textarea
+            name="message"
+            id="message"
+            placeholder="Your Message"
+            className="w-full h-40 px-4 rounded-md py-3 bg-gray-300"
+          ></textarea>
+          <button className="category-btn w-fit capitalize">
+            send message
+          </button>
         </Form>
       </Formik>
     </div>
