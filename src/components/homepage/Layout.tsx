@@ -8,7 +8,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import ProfileDropdown from "./header/ProfileDropdown";
 import Notification from "../cart/Notification";
 import { usePathname } from "next/navigation";
@@ -23,7 +22,6 @@ function Layout() {
     [0, 0.1],
     ["#0000", "#fc0388"],
   );
-  const { data: session, status } = useSession();
   const handleDropdown = () => {
     setActive(!active);
   };

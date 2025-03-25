@@ -1,19 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SignIn } from "@/components/login/Login";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 function Spage() {
-  const { status, data: session } = useSession();
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      redirect("/");
-    }
-  }, [status]);
-  console.log(session);
+  
   return (
     <div className="flex flex-col gap-8 xl:gap-32 lg:flex-row md:justify-between mt-8 md:mt-15">
       <div className="relative min-w-[200px] w-full min-h-[400px] max-w-[805px] max-h-[780px]">
