@@ -22,9 +22,9 @@ function Layout() {
     [0, 0.1],
     ["#0000", "#fc0388"],
   );
-  const handleDropdown = () => {
+ /*  const handleDropdown = () => {
     setActive(!active);
-  };
+  }; */
   useEffect(() => {
     if (active) {
       setTimeout(() => {
@@ -118,13 +118,18 @@ function Layout() {
                 About
               </Link>
             </div>
-            {status !== "authenticated" && (
+            {/* {status !== "authenticated" && (
               <div>
                 <Link href="/signup" className="hidden lg:block text-nowrap">
                   Sign Up
                 </Link>
               </div>
-            )}
+            )} */}
+             <div>
+                <Link href="/signup" className="hidden lg:block text-nowrap">
+                  Sign Up
+                </Link>
+              </div>
           </div>
         </div>
         <div className="flex items-center justify-between gap-6">
@@ -150,7 +155,7 @@ function Layout() {
               </div>
             </Link>
             <div className="relative">
-              <div>
+              {/* <div>
                 {session?.user?.image && (
                   <Image
                     onClick={handleDropdown}
@@ -161,7 +166,7 @@ function Layout() {
                     height={32}
                   />
                 )}
-              </div>
+              </div> */}
               <div
                 className={`absolute top-12 z-1 right-0 transition-all duration-900 ease-in-out ${
                   active ? "scale-100 opacity-100" : "scale-0 opacity-0"
