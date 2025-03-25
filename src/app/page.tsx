@@ -1,3 +1,4 @@
+
 import ProductList from "@/components/homepage/bestSellingProduct/ProductList";
 import Category from "@/components/homepage/category/Category";
 import Feature from "@/components/homepage/feature/Feature";
@@ -9,20 +10,13 @@ import CarolTop from "@/components/homepage/second/CarolTop";
 import SeCarousel from "@/components/homepage/second/SeCarousel";
 import Options from "@/components/homepage/subfooter/Options";
 import { Metadata } from "next";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 export const metadata: Metadata = {
   title: "Xprive.com",
   description: "Best luxury shop where items are made in  hell",
   keywords: "Luxury xprive xeron e-commerse-Website expensive",
 };
 export default function Home() {
-  useEffect(()=> {
-    const ulrPara= useSearchParams()
-    if(ulrPara.get('message')==="successfullyloggedin"){
 
-    }
-  })
   return (
     <div className="space-y-14 md:space-y-35">
       <div className="flex h-fit ">

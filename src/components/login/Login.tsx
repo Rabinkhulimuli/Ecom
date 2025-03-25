@@ -1,5 +1,4 @@
 "use client";
-import { useLoginSignup } from "@/controllerQuery/LoginApi";
 
 import { FcGoogle } from "react-icons/fc";
 export const SignIn = () => {
