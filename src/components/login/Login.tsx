@@ -2,10 +2,10 @@
 
 import { FcGoogle } from "react-icons/fc";
 export const SignIn = () => {
-  const redirecturl= process.env.REDIRECT_URL as string
+  const redirecturl= process.env.NEXT_PUBLIC_REDIRECT_URL as string
 const handleLogin=async ()=> {
  
-  window.location.href=`https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&redirect_uri=${redirecturl||"http://localhost:3001"}/api/auth/google/redirect&scope=profile%20email&client_id=801191979878-14auvuc2kbkie7r98ea8fpb3n7picmou.apps.googleusercontent.com&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow`
+  window.location.href=`https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&redirect_uri=${redirecturl}/api/auth/google/redirect&scope=profile%20email&client_id=801191979878-14auvuc2kbkie7r98ea8fpb3n7picmou.apps.googleusercontent.com&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow`
  }
   return (
     <button
