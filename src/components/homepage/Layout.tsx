@@ -11,10 +11,15 @@ import Link from "next/link";
 import ProfileDropdown from "./header/ProfileDropdown";
 import Notification from "../cart/Notification";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+
 function Layout() {
   const [showNav, setShowNav] = useState(true);
   const [active, setActive] = useState(false);
   const { scrollYProgress } = useScroll();
+  const user = useSelector((state:RootState)=> state.user.user)
+
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.1]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const backgroundColor = useTransform(
@@ -22,9 +27,10 @@ function Layout() {
     [0, 0.1],
     ["#0000", "#fc0388"],
   );
- /*  const handleDropdown = () => {
+  const handleDropdown = () => {
     setActive(!active);
-  }; */
+  };
+ 
   useEffect(() => {
     if (active) {
       setTimeout(() => {
@@ -118,18 +124,14 @@ function Layout() {
                 About
               </Link>
             </div>
-            {/* {status !== "authenticated" && (
+            {!user && (
               <div>
                 <Link href="/signup" className="hidden lg:block text-nowrap">
                   Sign Up
                 </Link>
               </div>
-            )} */}
-             <div>
-                <Link href="/signup" className="hidden lg:block text-nowrap">
-                  Sign Up
-                </Link>
-              </div>
+            )} 
+             
           </div>
         </div>
         <div className="flex items-center justify-between gap-6">
@@ -155,24 +157,24 @@ function Layout() {
               </div>
             </Link>
             <div className="relative">
-              {/* <div>
-                {session?.user?.image && (
+               <div>
+                {user?.image && (
                   <Image
                     onClick={handleDropdown}
                     className="rounded-full cursor-pointer"
-                    src={`${session?.user?.image}`}
+                    src={`${user?.image}`}
                     alt=""
                     width={32}
                     height={32}
                   />
                 )}
-              </div> */}
+              </div> 
               <div
                 className={`absolute top-12 z-1 right-0 transition-all duration-900 ease-in-out ${
                   active ? "scale-100 opacity-100" : "scale-0 opacity-0"
                 }`}
               >
-                <ProfileDropdown />
+                <ProfileDropdown setActive={setActive} />
               </div>
             </div>
           </div>

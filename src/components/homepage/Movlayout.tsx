@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { CgProfile } from "react-icons/cg";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,11 +8,14 @@ import { GiSelfLove } from "react-icons/gi";
 import { MdOutlineLogin } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { TbMenu2 } from "react-icons/tb";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import LogOut from "../login/logout";
 function Movlayout() {
   const [active, setActive] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { data: session, status } = useSession();
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const user= useSelector((state:RootState)=> state.user.user)
   useEffect(() => {
     if (active) {
       if (videoRef.current) {
@@ -104,17 +106,23 @@ function Movlayout() {
                 <FaShoppingCart className="w-6 h-6 md:w-8 md:h-8 " />
               </Link>
               <div>
-                {status === "authenticated" ? (
-                  session?.user?.image ? (
-                    <Link href="/account/myaccount" onClick={handleMenu}>
+                {user ? (
+                  user?.image ? (
+                    <div className="flex flex-col items-center gap-2 md:gap-4">
+                      <Link href="/account/myaccount" onClick={handleMenu}>
                       <Image
                         className="rounded-full w-6 h-6 md:w-8 md:h-8 "
-                        src={`${session?.user?.image}`}
+                        src={`${user?.image}`}
                         alt=""
                         width={20}
                         height={20}
                       />
                     </Link>
+                    <div onClick={handleMenu}>
+                      <LogOut/>
+                    </div>
+                    
+                    </div>
                   ) : (
                     <CgProfile className="w-6 h-6 md:w-8 md:h-8 " />
                   )
@@ -128,8 +136,8 @@ function Movlayout() {
           </div>
           <div className="w-full text-center mt-38 sm:mt-24">
             <p className="text-xl flex flex-col backdrop-blur-sm md:text-2xl font-semibold mb-4  ">
-              <span className="">{session?.user?.name || "Next Xen Appo"}</span>
-              <span className="text-xs">{session?.user?.email} </span>
+              <span className="">{user?.name || "Next Xen Appo"}</span>
+              <span className="text-xs">{user?.email} </span>
             </p>
             <hr />
           </div>
@@ -143,6 +151,7 @@ function Movlayout() {
             </Link>
             <Link
               href="/contact"
+              onClick={handleMenu}
               className="text-lg md:text-xl transition-all duration-700 cursor-pointer font-semibold hover:text-gray-900 ease-in-out  hover:bg-gray-200 px-2 py-1 w-full"
             >
               Contact
