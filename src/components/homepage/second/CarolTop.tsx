@@ -1,7 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { RxDoubleArrowRight } from "react-icons/rx";
+import { EmblaCarouselType } from 'embla-carousel';
 
-function CarolTop() {
+function CarolTop({emblaApi}:{emblaApi: EmblaCarouselType | undefined}) {
   const [distance, setDistance] = useState(0);
   useEffect(() => {
     const countdownDate = new Date("Jan 5, 2030 15:37:25").getTime();
@@ -24,8 +26,17 @@ function CarolTop() {
   );
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const scrollNext = useCallback(
+    () => emblaApi && emblaApi.scrollNext(),
+    [emblaApi]
+  );
+  const scrollPrev = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
+    [emblaApi]
+  );
   return (
-    <div className="category-2outer-div">
+   <div className="flex justify-between items-end ">
+     <div className="category-2outer-div">
       <div className="category-outer-div">
         <div className="flex items-center gap-2">
           <span className=" w-2 md:w-5  h-8 md:h-10 bg-[#DB4444] "></span>
@@ -61,7 +72,24 @@ function CarolTop() {
           </p>
         </div>
       </div>
+        
     </div>
+    <div className=" flex justify-end gap-2 items-start">
+              <button
+             
+                onClick={scrollNext}
+                className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
+              >
+                <RxDoubleArrowRight className=" w-full rotate-180 md:text-2xl" />
+              </button>
+              <button
+                onClick={scrollPrev}
+                className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
+              >
+                <RxDoubleArrowRight className=" w-full  md:text-2xl" />
+              </button>
+            </div>
+   </div>
   );
 }
 

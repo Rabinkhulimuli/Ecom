@@ -1,25 +1,43 @@
 "use client";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import OurTop from "./OurTop";
 import { secProduct } from "@/config/carouselRight";
 import { GiBleedingEye, GiStaryu } from "react-icons/gi";
 import { TiHeartOutline } from "react-icons/ti";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import AutoPlay from "embla-carousel-autoplay";
+import AutoPlay, { AutoplayType } from "embla-carousel-autoplay";
 import { RxDoubleArrowRight } from "react-icons/rx";
 function Ourproduct() {
+   const[isAutoplay,setIsAutoplay]= useState<AutoplayType|null>(null)
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "start" },
-    [AutoPlay({ stopOnMouseEnter: true })],
+    { loop: true, align: "start",dragFree:false,containScroll:"trimSnaps",slidesToScroll:2 },
+    [AutoPlay({ stopOnMouseEnter: false })],
   );
-  useEffect(() => {
-    if (!emblaApi) return;
-    emblaApi.plugins()?.autoplay?.stop(); // Stop autoplay initially
-    emblaApi.on("init", () => {
-      emblaApi.plugins()?.autoplay?.play(); // Start autoplay only after init
-    });
-  }, [emblaApi]);
+  useEffect(()=> {
+     if(!emblaApi) return
+     const autoplay= emblaApi.plugins().autoplay
+     if(!autoplay)  return
+       setIsAutoplay(autoplay)
+     
+   },[emblaApi])
+ const handleinteraction = useCallback(()=> {
+     if(isAutoplay?.isPlaying())  return 
+     isAutoplay?.stop()
+     setTimeout(()=> {
+       isAutoplay?.play()
+     },3000)
+ },[isAutoplay])
+ 
+ useEffect(()=> {
+   if(!isAutoplay || !emblaApi) return
+   emblaApi.on("pointerDown",handleinteraction)
+   emblaApi.on("select",handleinteraction)
+   return ()=> {
+     emblaApi.off("pointerDown",handleinteraction)
+     emblaApi.off("select",handleinteraction)
+   }
+ },[isAutoplay,emblaApi,handleinteraction])
   const scrollNext = useCallback(() => {
     if (emblaApi?.canScrollNext()) {
       return emblaApi && emblaApi.scrollNext();
@@ -31,10 +49,10 @@ function Ourproduct() {
     }
   }, [emblaApi]);
   return (
-    <div>
+    <div >
       <OurTop />
-      <div className="relative w-full h-full ">
-        <div className="absolute inset-0 flex justify-end gap-2 items-start m-auto right-0 z-10 -top-10 md:-top-14">
+      <div className="relative">
+      <div className="absolute inset-0 -top-18 flex justify-end gap-2 items-start m-auto right-0 z-10 h-fit">
           <button
             onClick={scrollNext}
             className="bg-[#F5F5F5]  p-2 rounded-full flex items-center "
@@ -48,18 +66,21 @@ function Ourproduct() {
             <RxDoubleArrowRight className=" w-full  md:text-2xl" />
           </button>
         </div>
+      </div>
+      <div className="relative w-full h-full ">
+        
         <div ref={emblaRef} className="overflow-hidden overscroll-contain">
           <div className="flex ">
             {Array.from({ length: Math.ceil(secProduct.length / 2) }).map(
               (_, index) => (
                 <div key={index} className="flex-shrink-0 max-w-[325px] w-full">
-                  <div className="grid grid-rows-2 lg:justify-between  gap-8 lg:gap-14">
+                  <div className="grid grid-rows-2 lg:justify-between  gap-8  lg:gap-14">
                     {secProduct.slice(index * 2, index * 2 + 2).map((eh) => (
                       <div
                         key={eh.id}
                         className="border-white border-4 flex-shrink-0  min-w-67 "
                       >
-                        <div className="relative group flex py-10 min-w-67 h-62 overflow-hidden justify-center bg-gray-100">
+                        <div className="relative group flex py-10  min-w-67 h-62 overflow-hidden justify-center bg-gray-100">
                           <div className="max-w-43 max-h-38">
                             <Image
                               className="w-full h-full object-cover"
@@ -84,16 +105,20 @@ function Ourproduct() {
                         </div>
                         <div className="mt-4 flex flex-col gap-2 font-semibold ">
                           <h2>{eh.title} </h2>
-                          <p className="text-[#DB4444]">${eh.price} </p>
-                          {eh.discount > 0 && (
-                            <p>
-                              {(
-                                eh.price -
-                                (eh.price * eh.discount) / 100
-                              ).toFixed(2)}{" "}
-                            </p>
-                          )}
-
+                          <div className="flex gap-2">
+                    {eh.discount > 0 && (
+                      <p>
+                        {(eh.price - (eh.price * eh.discount) / 100).toFixed(2)}{" "}
+                      </p>
+                    )}
+                    <p
+                      className={`${
+                        eh.discount > 0 ? "line-through text-[#DB4444] " : ""
+                      }`}
+                    >
+                      ${eh.price}{" "}
+                    </p>
+                  </div>
                           <div className="flex items-center gap-1 ">
                             {Array.from({ length: 5 }).map((_, index) => (
                               <div key={index}>

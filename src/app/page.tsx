@@ -6,7 +6,6 @@ import Leftfirst from "@/components/homepage/first/Leftfirst";
 import Rightfirst from "@/components/homepage/first/Rightfirst";
 import Musicbanner from "@/components/homepage/Musicbanner";
 import Ourproduct from "@/components/homepage/product/Ourproduct";
-import CarolTop from "@/components/homepage/second/CarolTop";
 import SeCarousel from "@/components/homepage/second/SeCarousel";
 import Options from "@/components/homepage/subfooter/Options";
 import {  Metadata } from "next";
@@ -28,10 +27,7 @@ export default function Home() {
 
         <Rightfirst />
       </div>
-      <div className="space-y-4 md:space-y-15">
-        <CarolTop />
         <SeCarousel />
-      </div>
       <Category />
       <ProductList />
       <Musicbanner />
