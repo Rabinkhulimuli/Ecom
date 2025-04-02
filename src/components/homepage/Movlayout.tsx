@@ -27,6 +27,25 @@ function Movlayout() {
     }
   }, [active]);
   useEffect(() => {
+    const disableScroll = (e: Event) => {
+      e.preventDefault();
+    };
+  
+    if (active) {
+      document.addEventListener("touchmove", disableScroll, { passive: false });
+      document.addEventListener("wheel", disableScroll, { passive: false });
+    } else {
+      document.removeEventListener("touchmove", disableScroll);
+      document.removeEventListener("wheel", disableScroll);
+    }
+  
+    return () => {
+      document.removeEventListener("touchmove", disableScroll);
+      document.removeEventListener("wheel", disableScroll);
+    };
+  }, [active]);
+  
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) {
       return;

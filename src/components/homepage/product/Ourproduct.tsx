@@ -73,12 +73,12 @@ function Ourproduct() {
           <div className="flex ">
             {Array.from({ length: Math.ceil(secProduct.length / 2) }).map(
               (_, index) => (
-                <div key={index} className="flex-shrink-0 max-w-[325px] w-full">
-                  <div className="grid grid-rows-2 lg:justify-between  gap-8  lg:gap-14">
+                <div key={index} className="flex-shrink-0 lg:flex-shrink max-w-[325px] w-full lg:pr-4">
+                  <div className="grid grid-rows-2 w-full lg:justify-between  gap-8  lg:gap-14">
                     {secProduct.slice(index * 2, index * 2 + 2).map((eh) => (
                       <div
                         key={eh.id}
-                        className="border-white border-4 flex-shrink-0  min-w-67 "
+                        className="border-white border-4 flex-shrink-0   min-w-67 "
                       >
                         <div className="relative group flex py-10  min-w-67 h-62 overflow-hidden justify-center bg-gray-100">
                           <div className="max-w-43 max-h-38">
@@ -104,7 +104,7 @@ function Ourproduct() {
                           </div>
                         </div>
                         <div className="mt-4 flex flex-col gap-2 font-semibold ">
-                          <h2>{eh.title} </h2>
+                          <h2 className="text-nowrap overflow-x-hidden">{eh.title} </h2>
                           <div className="flex gap-2">
                     {eh.discount > 0 && (
                       <p>
