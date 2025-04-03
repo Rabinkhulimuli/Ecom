@@ -20,12 +20,14 @@ export default function Home() {
 
   return (
     <div className="space-y-14 md:space-y-35">
-      <div className="flex h-fit ">
-        <div className="hidden lg:flex justify-center items-center border-r-2 pr-4">
+      <div className="flex h-fit  ">
+        <div className="hidden lg:flex  justify-center items-center border-r-2 xl:pr-4">
           <Leftfirst />
         </div>
-
-        <Rightfirst />
+        <div className="w-full">
+          <Rightfirst />
+        </div>
+        
       </div>
         <SeCarousel />
       <Category />

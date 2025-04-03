@@ -10,7 +10,7 @@ const handleLogin=async ()=> {
   return (
     <button
       onClick={()=> handleLogin()}
-      className="text-lg py-2 cursor-pointer md:py-4 rounded-sm w-full border flex justify-center items-center gap-4 "
+      className="text-lg py-2 cursor-pointer md:py-4 hover:bg-gray-50 rounded-sm w-full border flex justify-center items-center gap-4 "
     >
       {" "}
       <FcGoogle className="w-6 h-6" /> <span>Sign up with google</span>{" "}

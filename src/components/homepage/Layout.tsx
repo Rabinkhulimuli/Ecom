@@ -13,13 +13,14 @@ import Notification from "../cart/Notification";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import { CgProfile } from "react-icons/cg";
 
 function Layout() {
   const [showNav, setShowNav] = useState(true);
   const [active, setActive] = useState(false);
   const { scrollYProgress } = useScroll();
   const user = useSelector((state:RootState)=> state.user.user)
-
+  console.log("redux user",user)
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.1]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const backgroundColor = useTransform(
@@ -56,9 +57,9 @@ function Layout() {
   const pathname = usePathname();
   return (
     <div
-      className={`sticky z-20 w-full transition-all duration-700 ease-in-out ${!showNav ? "opacity-0 invisible" : "opacity-100 visible"}  inset-0 top-0 bg-white h-fit`}
+      className={`sticky z-20 w-full  transition-all duration-700 ease-in-out ${!showNav ? "opacity-0 invisible" : "opacity-100 visible"}  inset-0 top-0 bg-white h-fit`}
     >
-      <div className="flex my-1 sm:my-4  items-center justify-between text-lg">
+      <div className="flex my-1 sm:my-4   items-center justify-between text-lg">
         <div className="flex items-center justify-between xl:gap-40 2xl:gap-48 ">
           <div className="relative w-14 ">
             <Link href="/" className="  ">
@@ -67,8 +68,8 @@ function Layout() {
                   className=""
                   src="/companyProducts/company-sub.png"
                   alt=""
-                  width={100}
-                  height={100}
+                 fill
+                 sizes="100"
                 />
               </div>
             </Link>
@@ -124,7 +125,7 @@ function Layout() {
                 About
               </Link>
             </div>
-            {!user && (
+            {user===null && (
               <div>
                 <Link href="/signup" className="hidden lg:block text-nowrap">
                   Sign Up
@@ -134,7 +135,7 @@ function Layout() {
              
           </div>
         </div>
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-between  gap-6">
           <div className=" hidden sm:flex items-center px-5 py-1 justify-between bg-gray-50">
             <input
               className="text-lg"
@@ -156,9 +157,9 @@ function Layout() {
                 <Notification />
               </div>
             </Link>
-            <div className="relative">
+            <div className="relative ">
                <div>
-                {user?.image && (
+                {user!==null && (user?.image ? (
                   <Image
                     onClick={handleDropdown}
                     className="rounded-full cursor-pointer"
@@ -167,7 +168,8 @@ function Layout() {
                     width={32}
                     height={32}
                   />
-                )}
+                ):<CgProfile  onClick={handleDropdown}
+                className="rounded-full cursor-pointer w-8 h-8 "   />)}
               </div> 
               <div
                 className={`absolute top-12 z-1 right-0 transition-all duration-900 ease-in-out ${

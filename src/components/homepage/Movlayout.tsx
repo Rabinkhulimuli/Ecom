@@ -143,7 +143,15 @@ function Movlayout() {
                     
                     </div>
                   ) : (
-                    <CgProfile className="w-6 h-6 md:w-8 md:h-8 " />
+                    <div>
+                      <Link href="/account/myaccount" onClick={handleMenu}>
+                      <CgProfile className="w-6 h-6 md:w-8 md:h-8 " />
+                      </Link>
+                       
+                       <div onClick={handleMenu}>
+                      <LogOut/>
+                    </div>
+                    </div>
                   )
                 ) : (
                   <Link href="/signup" onClick={handleMenu}>

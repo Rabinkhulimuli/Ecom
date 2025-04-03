@@ -5,7 +5,7 @@ import { IoIosArrowForward } from "react-icons/io";
 export default function Leftfirst() {
 
   return (
-    <div className=" md:mr-4 lg:mr-10">
+    <div className=" md:mr-2 xl:mr-10">
       <h2 className="text-2xl sm:hidden font-semibold mb-6 text-center w-full bg-blue-900/10 px-1 shadow-lg rounded-sm">
         Our Collections
       </h2>

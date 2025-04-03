@@ -4,9 +4,13 @@ import { LogOutUser } from "@/lib/getUser";
 import { clearUser } from "@/lib/user/userSlice";
  export default function LogOut(){
     const dispatch = useDispatch()
-    const handleLogout=()=> {
-        LogOutUser()
+    const handleLogout=async()=> {
+        try{  
+        await LogOutUser()
         dispatch(clearUser())
+        }catch(err){
+            console.log(err)
+        }
     }
     return (
         <>

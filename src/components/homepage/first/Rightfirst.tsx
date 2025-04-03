@@ -13,7 +13,7 @@ function Rightfirst() {
      dragFree:false,
      slidesToScroll:1,
     },
-    [Autoplay({stopOnMouseEnter:false,delay:3000})]
+    [Autoplay({stopOnMouseEnter:false,delay:4000})]
   );
   
   
@@ -58,9 +58,9 @@ useEffect(()=> {
     emblaApi.scrollTo(index);
   }; 
   return (
-    <div className="w-full">
+    <div className="">
       <div className="relative cursor-pointer">
-      <div className="relative">
+      <div className="relative ">
       <div ref={emblaRef} className="overflow-hidden touch-pan-y">
         <div className="flex">
           {carouselArray.map((eh) => (

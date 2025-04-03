@@ -1,12 +1,17 @@
+"use client"
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import Leftfirst from "../first/Leftfirst";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 function TopAds() {
-  const [show, setShow] = useState(50);
+  const [show, setShow] = useState(()=> 50);
   const [isInside, setIsInside] = useState(false);
+  
+  const [isClient, setIsClient] = useState(false);
+  const pathname = usePathname()
   useEffect(() => {
+    setIsClient(true)
     const handleShow = (event: MouseEvent) => {
       if (!isInside) {
         let posit = (event.clientY * 100) / window.innerHeight - 20;
@@ -17,18 +22,18 @@ function TopAds() {
     document.addEventListener("mousemove", handleShow);
     return () => document.removeEventListener("mousemove", handleShow);
   }, [isInside]);
-  const pathname = usePathname();
+  
   return (
     <div className="flex relative justify-end items-center px-8 h-12 md:px-33 bg-black text-white">
       <div className="flex gap-2 sm:gap-6  lg:gap-57 items-center">
         <div className="text-sm capitalize text-nowrap max-w-[270px] sm:max-w-[450px] flex items-center gap-2">
-          <Marquee speed={40} pauseOnHover={true}>
+          { isClient &&<Marquee speed={40} pauseOnHover={true}>
             {" "}
             <p>
               summer sale for all swims suits and free express delivery -OFF
               50%! <span className="w-4 px-1"></span>{" "}
             </p>
-          </Marquee>{" "}
+          </Marquee>}{" "}
           <Link href="/" className="underline text-xs sm:text-sm font-semibold">
             shop now
           </Link>
@@ -43,7 +48,7 @@ function TopAds() {
       </div>
       <div className="group lg:hidden ">
         <div className="w-6 group-hover:w-12  fixed h-[87%]  top-12 left-0 group"></div>
-        {pathname === "/" && (
+        {pathname === "/" &&isClient && (
           <div
             style={{ top: `${show}%` }}
             className={` fixed  text-black transition-all duration-700 ease-in-out -translate-x-80 opacity-0 group-hover:opacity-100 group-hover:translate-x-0  z-20 px-6 py-8 bg-white rounded-sm  left-10 `}
