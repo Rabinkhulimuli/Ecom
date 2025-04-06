@@ -3,8 +3,8 @@ self.addEventListener('push', function (event) {
       const data = event.data.json()
       const options = {
         body: data.body,
-        icon: data.icon || '/icon.png',
-        badge: '/badge.png',
+        icon: data.icon || 'icons/com-logo.png',
+        badge: 'icons/com-logo.png',
         vibrate: [100, 50, 100],
         data: {
           dateOfArrival: Date.now(),
@@ -18,5 +18,5 @@ self.addEventListener('push', function (event) {
   self.addEventListener('notificationclick', function (event) {
     console.log('Notification click received.')
     event.notification.close()
-    event.waitUntil(clients.openWindow('<https://your-website.com>'))
+    event.waitUntil(clients.openWindow('https://ecom-ten-bice.vercel.app'))
   })

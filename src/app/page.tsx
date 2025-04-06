@@ -17,7 +17,7 @@ import Options from "@/components/homepage/subfooter/Options";
 
 
 import { useState, useEffect } from "react";
-import { subscribeUser, unsubscribeUser, sendNotification } from "./action";
+import { subscribeUser, unsubscribeUser } from "./action";
 import { MdNotificationAdd } from "react-icons/md";
 
 function urlBase64ToUint8Array(base64String: string) {
@@ -37,10 +37,10 @@ function PushNotificationManager() {
   const [subscription, setSubscription] = useState<PushSubscription | null>(
     null
   );
-  const [message, setMessage] = useState("");
+/*   const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); */
   const [isActive, setIsActive] = useState(false);
 
 
@@ -52,13 +52,14 @@ function PushNotificationManager() {
   }, []);
 
   async function handleSubscription() {
-    setIsLoading(true);
-    setError(null);
+   /*  setIsLoading(true);
+    setError(null); */
     try {
       if (subscription) {
         await subscription.unsubscribe();
-        await unsubscribeUser();
+        await unsubscribeUser(subscription.endpoint);
         setSubscription(null);
+        setIsActive(false)
       } else {
         const registration = await navigator.serviceWorker.ready;
         const newSubscription = await registration.pushManager.subscribe({
@@ -86,23 +87,24 @@ function PushNotificationManager() {
         };
         await subscribeUser(serializedSub);
         setSubscription(newSubscription);
+        setIsActive(true)
       }
     } catch (err) {
       console.error('Subscription error:', err)
-      setError('Failed to update subscription')
-    }finally {
+     /*  setError('Failed to update subscription') */
+    }/* finally {
       setIsLoading(false)
-    }
+    } */
   }
 
-  async function handleSendNotification() {
+ /*  async function handleSendNotification() {
     if (!message.trim()) return
     
     setIsLoading(true)
     setError(null)
     
     try {
-      await sendNotification(message)
+      await sendNotificationToAll(message)
       setMessage('')
     } catch (err) {
       console.error('Notification error:', err)
@@ -111,7 +113,7 @@ function PushNotificationManager() {
       setIsLoading(false)
     }
   }
-
+ */
   async function registerServiceWorker() {
     const registration = await navigator.serviceWorker.register("/sw.js", {
       scope: "/",
@@ -127,8 +129,13 @@ function PushNotificationManager() {
 
   return (
     <div className="relative">
-      <MdNotificationAdd onClick={()=> setIsActive(!isActive)} className="sm:w-7 sm:h-7 text-white bg-black absolute rounded-full -top-5 sm:-top-10 right-0 z-10 "/>
-      {isActive && <div className="p-4 absolute border rounded-lg max-w-md mx-auto z-20 bg-white right-0">
+      <MdNotificationAdd onClick={handleSubscription} className={`sm:w-7 sm:h-7 text-white bg-black absolute rounded-full -top-5 sm:-top-10 right-0 z-10 ${isActive?"bg-yellow-500":""}`} />
+      
+    </div>
+  )
+  }
+/* 
+{isActive && <div className="p-4 absolute border rounded-lg max-w-md mx-auto z-20 bg-white right-0">
       <h3 className="text-lg font-bold mb-4">Push Notifications</h3>
       
       {error && <p className="text-red-500 mb-2">{error}</p>}
@@ -176,72 +183,102 @@ function PushNotificationManager() {
         </>
       )}
     </div>}
-    </div>
-  )
+*/
+  interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: string[];
+    readonly userChoice: Promise<{
+      outcome: 'accepted' | 'dismissed';
+      platform: string;
+    }>;
+    prompt(): Promise<void>;
   }
-
-
-
 function InstallPrompt() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent |  null>(null);
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
-  const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => {
-    setIsIOS(
-      /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-        typeof (window as typeof window & { MSStream?: unknown }).MSStream ===
-          "undefined"
-    );
 
-    setIsStandalone(
-      window.matchMedia("(display-mode: standalone)").matches ||
-        (window.navigator as Navigator & { standalone?: boolean })
-          .standalone === true
-    ); // iOS Safari specific
-    const handleBeforeInstallPrompt=(e:Event)=> {
-      e.preventDefault()
-      setDeferredPrompt(e)
-      setIsVisible(true)
-    }
-    window.addEventListener("beforeinstallprompt",handleBeforeInstallPrompt)
-    return ()=> {
-      window.removeEventListener("beforeinstallprompt",handleBeforeInstallPrompt)
-    }
+  useEffect(() => {
+    // Check if app is already installed
+    const isInStandaloneMode = () => {
+      // For most browsers
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        return true;
+      }
+      
+      // For iOS Safari
+      if ('standalone' in window.navigator) {
+        return (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
+      }
+      
+      return false;
+    };
+    setIsStandalone(isInStandaloneMode());
+
+    // Improved iOS detection
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isIOSDevice = /iphone|ipad|ipod/.test(userAgent);
+    const isSafari = /safari/.test(userAgent);
+    const isChrome = /crios/.test(userAgent);
+    const isFirefox = /fxios/.test(userAgent);
+    
+    setIsIOS(isIOSDevice && (isSafari || isChrome || isFirefox));
+
+    // Handle beforeinstallprompt event
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      setIsVisible(true);
+    };
+    
+    window.addEventListener('beforeinstallprompt', handler);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+    };
   }, []);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+      // For iOS, we can only show instructions
+      if (isIOS) {
+        alert('To install this app, tap the share icon and then "Add to Home Screen".');
+      }
+      return;
+    }
+
+    // Show the install prompt for Android/other browsers
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
     
-    const promptEvent = deferredPrompt as unknown as { prompt: () => Promise<{ outcome: string }> };
-    await promptEvent.prompt();
-    const { outcome } = await promptEvent.prompt();
-    
-    if (outcome === "accepted") {
-      console.log("User accepted the install prompt");
+    if (outcome === 'accepted') {
+      console.log('User accepted the install prompt');
     } else {
-      console.log("User dismissed the install prompt");
+      console.log('User dismissed the install prompt');
     }
     
     setDeferredPrompt(null);
     setIsVisible(false);
   };
-  if (isStandalone || isVisible  ) {
-    return null; // Don't show install button if already installed
+
+  // Don't show if already installed or if not visible
+  if (isStandalone || !isVisible) {
+    return null;
   }
 
   return (
-    <div className="fixed z-5 bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg border">
+    <div className="fixed z-50 bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg border max-w-xs">
       <h3 className="font-bold mb-2">Install App</h3>
-      <button 
+      <p className="text-sm mb-3">Get the best experience by installing our app!</p>
+      <button
         onClick={handleInstallClick}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full"
       >
         Install Now
       </button>
       {isIOS && (
-        <p className="mt-2 text-sm">
-          For iOS, tap the share button and then &quot;Add to Home Screen&quot;
+        <p className="mt-2 text-xs text-gray-600">
+          For iOS, tap <span className="font-bold">Share</span> then <span className="font-bold">Add to Home Screen</span>
         </p>
       )}
     </div>
