@@ -26,9 +26,10 @@ const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 axios.defaults.baseURL = apiUrl;
 axios.defaults.withCredentials = true;
 export default function RootLayout({
-  children,
+  children,modal
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode,
+  modal:React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -41,6 +42,10 @@ export default function RootLayout({
             <section className="mx-8  space-y-4 md:mx-33 ">
               <Layout />
               <div className=" mt-10 sm:mt-24">{children}</div>
+            
+             <div>
+               {modal} 
+             </div>
             </section>
             <Footer />
           </AppQuery>

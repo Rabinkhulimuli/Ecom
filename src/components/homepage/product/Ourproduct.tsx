@@ -8,6 +8,7 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay, { AutoplayType } from "embla-carousel-autoplay";
 import { RxDoubleArrowRight } from "react-icons/rx";
+import Link from "next/link";
 function Ourproduct() {
    const[isAutoplay,setIsAutoplay]= useState<AutoplayType|null>(null)
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -76,7 +77,7 @@ function Ourproduct() {
                 <div key={index} className="flex-shrink-0 lg:flex-shrink max-w-[325px] w-full lg:pr-4">
                   <div className="grid grid-rows-2 w-full lg:justify-between  gap-8  lg:gap-14">
                     {secProduct.slice(index * 2, index * 2 + 2).map((eh) => (
-                      <div
+                      <Link href={`product/${eh.id}`}
                         key={eh.id}
                         className="border-white border-4 flex-shrink-0   min-w-67 "
                       >
@@ -132,7 +133,7 @@ function Ourproduct() {
                             <span className="ml-1">({eh.NumStar}) </span>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

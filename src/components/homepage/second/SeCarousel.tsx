@@ -10,6 +10,7 @@ import AutoPlay, {
 } from "embla-carousel-autoplay";
 import { GiBleedingEye, GiStaryu } from "react-icons/gi";
 import CarolTop from "./CarolTop";
+import Link from "next/link";
 function SeCarousel() {
   const [alignCaro, setAlignCaro] = useState<"start" | "center">("start");
   const [isHovering, setIshovering] = useState(false);
@@ -101,7 +102,7 @@ function SeCarousel() {
         >
           <div className="flex  z-10">
             {secProduct.map((eh) => (
-              <div
+              <Link href={`product/${eh.id}`}
                 key={eh.id}
                 className="border-white border-4 flex-shrink-0  min-w-67 group"
               >
@@ -157,7 +158,7 @@ function SeCarousel() {
                     <span className="ml-1">({eh.NumStar}) </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -4,6 +4,7 @@ import { secProduct } from "@/config/carouselRight";
 import Image from "next/image";
 import { TiHeartOutline } from "react-icons/ti";
 import { GiBleedingEye, GiStaryu } from "react-icons/gi";
+import Link from "next/link";
 
 function ProductList() {
   return (
@@ -11,7 +12,7 @@ function ProductList() {
       <TopBestSelling />
       <div className="grid grid-cols-2 lg:grid-cols-4  justify-between gap-4">
         {secProduct.slice(0, 4).map((eh) => (
-          <div
+          <Link href={`product/${eh.id}`}
             key={eh.id}
             className="border-white border-4 flex-shrink-0  w-full group"
           >
@@ -57,7 +58,7 @@ function ProductList() {
                 <span className="ml-1">({eh.NumStar}) </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
