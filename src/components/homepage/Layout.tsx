@@ -56,9 +56,9 @@ function Layout() {
   const pathname = usePathname();
   return (
     <div
-      className={`sticky z-20 w-full  transition-all duration-700 ease-in-out ${!showNav ? "opacity-0 invisible" : "opacity-100 visible"}  inset-0 top-0 bg-white h-fit`}
+      className={`sticky z-20 w-full py-2 border-b-1  transition-all duration-700 ease-in-out ${!showNav ? "opacity-0 invisible" : "opacity-100 visible"}  inset-0 top-0 bg-white h-fit`}
     >
-      <div className="flex my-1 sm:my-4   items-center justify-between text-lg">
+      <div className="flex  items-center justify-between text-lg">
         <div className="flex items-center justify-between xl:gap-40 2xl:gap-48 ">
           <div className="relative w-14 ">
             <Link href="/" className="  ">
@@ -79,7 +79,7 @@ function Layout() {
                   initial={{ scale: 1 }}
                   whileTap={{ scale: 1.5 }}
                   style={{ scale, opacity, backgroundColor }}
-                  className="fixed top-12 sm:top-15 md:top-15 md:left-32 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full "
+                  className="fixed top-13 sm:top-14 md:top-14 md:left-32 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full "
                 >
                   <Image
                     src="/companyProducts/com-logo.png"
@@ -185,9 +185,7 @@ function Layout() {
         </div>
         
       </div>
-      <div>
-        <hr className="text-gray-200 " />
-      </div>
+      
     </div>
   );
 }

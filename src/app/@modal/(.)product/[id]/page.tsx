@@ -1,13 +1,13 @@
-"use client";
+"use client"
 import { secProduct } from '@/config/carouselRight';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { GiStaryu } from 'react-icons/gi';
 import { RxCross2 } from 'react-icons/rx';
 
 type Params = {
-  id: number;
+  id: string;
 };
 interface Product {
   id: number;
@@ -18,24 +18,24 @@ interface Product {
   totalStar: number;
   image: string;
 }
-function Product({ params }: { params: Params }) { // Removed Promise<Params>
+ function Product({ params }: { params:Promise< Params> }) {
   const router = useRouter();
   const [product, setProduct] = useState<Product|null>(null);
-  const { id } = params; // Direct access (no Promise)
+  const  id  =  parseInt(use(params).id); 
 
   useEffect(() => {
     // Validate ID and data before access
-    if (typeof id === 'number' && secProduct && secProduct.length > id) {
+    if (!isNaN(id) && secProduct && secProduct.length > id) {
       setProduct(secProduct[id]);
     } else {
-      router.replace('/not-found'); // Invalid ID
+      router.replace('/not-found');
     }
   }, [id, router]);
 
   if (!product) {
     return <div className="fixed inset-0 flex items-center justify-center bg-black/50">
       Loading...
-    </div>; // Unified loading state
+    </div>;
   }
 
   return (
@@ -47,13 +47,13 @@ function Product({ params }: { params: Params }) { // Removed Promise<Params>
             className='absolute top-0 -right-5 w-7 h-7 text-white bg-red-700 rounded-full cursor-pointer'
           />
         </div>
-        <div onClick={() => router.push(`/product/${id}`)}>
+        <div onClick={() => (window.location.href=`/product/${id}`)}>
           <Image 
             src={product.image} 
             alt={product.title} 
             width={200} 
             height={200} 
-            className='w-60 sm:w-80 rounded-md'
+            className='w-60 sm:w-80 rounded-md cursor-pointer'
           />
         </div>
         <div className="flex flex-col w-full gap-2 px-4 mt-4 font-semibold rounded-md h-full backdrop-blur-2xl">
