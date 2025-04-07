@@ -20,7 +20,6 @@ function Layout() {
   const [active, setActive] = useState(false);
   const { scrollYProgress } = useScroll();
   const user = useSelector((state:RootState)=> state.user.user)
-  console.log("redux user",user)
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.1]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const backgroundColor = useTransform(
@@ -63,7 +62,7 @@ function Layout() {
         <div className="flex items-center justify-between xl:gap-40 2xl:gap-48 ">
           <div className="relative w-14 ">
             <Link href="/" className="  ">
-              <div className=" m-auto absolute w-30 md:w-36 h-18 -top-11 md:-top-10 left-3 md:left-4">
+              <div className=" m-auto absolute w-30 md:w-36 h-18 -top-9  left-3 md:left-4">
                 <Image
                   className=""
                   src="/companyProducts/company-sub.png"
@@ -89,7 +88,7 @@ function Layout() {
                     height={44}
                   />
                 </motion.div>
-                <div className="absolute -top-5.5 opacity-40 md:-left-1 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full ">
+                <div className="absolute -top-5 opacity-40 md:-left-1 w-9 h-9 md:w-11 md:h-11 z-10 rounded-full ">
                   <Image
                     src="/companyProducts/com-logo.png"
                     alt=""
@@ -136,9 +135,9 @@ function Layout() {
           </div>
         </div>
         <div className="flex items-center justify-between  gap-6">
-          <div className=" hidden sm:flex items-center px-5 py-1 justify-between bg-gray-50">
+          <div className=" hidden sm:flex items-center px-2 py-1 justify-between bg-gray-50">
             <input
-              className="text-lg"
+              className="text-lg px-3"
               type="text"
               name="search"
               placeholder="What are you lookin for ?"
@@ -180,10 +179,11 @@ function Layout() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="block xl:hidden">
+          <div className="block xl:hidden">
           <Movlayout />
         </div>
+        </div>
+        
       </div>
       <div>
         <hr className="text-gray-200 " />

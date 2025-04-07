@@ -1,7 +1,7 @@
 
 
 function Default() {
-  return null
+  return <></>
 }
 
 export default Default
