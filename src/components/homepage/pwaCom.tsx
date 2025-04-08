@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
-import { subscribeUser, unsubscribeUser } from "../../app/action";
+import { sendNotificationToAll, subscribeUser, unsubscribeUser } from "../../app/action";
 import { MdNotificationAdd } from "react-icons/md";
+
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
-
   const rawData = window.atob(base64);
   const outputArray = new Uint8Array(rawData.length);
 
@@ -15,110 +15,99 @@ function urlBase64ToUint8Array(base64String: string) {
   }
   return outputArray;
 }
+
 export function PushNotificationManager() {
   const [isSupported, setIsSupported] = useState(false);
-  const [subscription, setSubscription] = useState<PushSubscription | null>(
-    null
-  );
-/*   const [message, setMessage] = useState("");
+  const [subscription, setSubscription] = useState<PushSubscription | null>(null);
+  const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
-
-  const [isLoading, setIsLoading] = useState(false); */
+  const [isLoading, setIsLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-
 
   useEffect(() => {
     if ("serviceWorker" in navigator && "PushManager" in window) {
       setIsSupported(true);
       registerServiceWorker();
+    } else {
+      setError("Push notifications are not supported in this browser");
     }
   }, []);
 
-  async function handleSubscription() {
-   /*  setIsLoading(true);
-    setError(null); */
+  async function registerServiceWorker() {
     try {
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
+        updateViaCache: "none",
+      });
+      const sub = await registration.pushManager.getSubscription();
+      setSubscription(sub);
+      setIsActive(!!sub);
+    } catch (err) {
+      console.error("ServiceWorker registration failed:", err);
+      setError("Service Worker registration failed");
+    }
+  }
+
+  async function handleSubscription() {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") {
+        throw new Error("Notification permission denied");
+      }
+
       if (subscription) {
         await subscription.unsubscribe();
         await unsubscribeUser(subscription.endpoint);
         setSubscription(null);
-        setIsActive(false)
+        setIsActive(false);
       } else {
         const registration = await navigator.serviceWorker.ready;
+        const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+        if (!vapidPublicKey) {
+          throw new Error("VAPID public key is missing");
+        }
+
         const newSubscription = await registration.pushManager.subscribe({
           userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(
-            process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-          ),
+          applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
         });
+
         const serializedSub = {
           endpoint: newSubscription.endpoint,
           expirationTime: newSubscription.expirationTime,
           keys: {
-            p256dh: btoa(
-              String.fromCharCode(
-                ...new Uint8Array(newSubscription.getKey("p256dh")!)
-              )
-            ),
-
-            auth: btoa(
-              String.fromCharCode(
-                ...new Uint8Array(newSubscription.getKey("auth")!)
-              )
-            ),
+            p256dh: btoa(String.fromCharCode(...new Uint8Array(newSubscription.getKey("p256dh")!))),
+            auth: btoa(String.fromCharCode(...new Uint8Array(newSubscription.getKey("auth")!))),
           },
         };
+
         await subscribeUser(serializedSub);
         setSubscription(newSubscription);
-        setIsActive(true)
+       
       }
     } catch (err) {
-      console.error('Subscription error:', err)
-     /*  setError('Failed to update subscription') */
-    }/* finally {
-      setIsLoading(false)
-    } */
-  }
-
- /*  async function handleSendNotification() {
-    if (!message.trim()) return
-    
-    setIsLoading(true)
-    setError(null)
-    
-    try {
-      await sendNotificationToAll(message)
-      setMessage('')
-    } catch (err) {
-      console.error('Notification error:', err)
-      setError('Failed to send notification')
+      console.error('Subscription error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to update subscription');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
- */
-  async function registerServiceWorker() {
-    const registration = await navigator.serviceWorker.register("/sw.js", {
-      scope: "/",
-      updateViaCache: "none",
-    });
-    const sub = await registration.pushManager.getSubscription();
-    setSubscription(sub);
-  }
+
 
   if (!isSupported) {
     return <p className="text-red-500">Push notifications are not supported in this browser.</p>
   }
-
+const handleNotification=async()=> {
+  await sendNotificationToAll(message)
+  
+}
   return (
     <div className="relative">
-      <MdNotificationAdd onClick={handleSubscription} className={`sm:w-7 sm:h-7 text-white bg-black absolute rounded-full -top-5 sm:-top-10 right-0 z-10 ${isActive?"bg-yellow-500":""}`} />
-      
-    </div>
-  )
-  }
-/* 
-{isActive && <div className="p-4 absolute border rounded-lg max-w-md mx-auto z-20 bg-white right-0">
+      <MdNotificationAdd onClick={()=>  setIsActive(!isActive)} className={`sm:w-7 sm:h-7 text-white bg-black absolute rounded-full -top-5 sm:-top-10 right-0 z-10 ${isActive?"bg-yellow-500":""}`} />
+      {isActive && <div className="p-4 absolute border rounded-lg max-w-md mx-auto z-20 bg-white right-0">
       <h3 className="text-lg font-bold mb-4">Push Notifications</h3>
       
       {error && <p className="text-red-500 mb-2">{error}</p>}
@@ -145,7 +134,7 @@ export function PushNotificationManager() {
             />
             
             <button
-              onClick={handleSendNotification}
+              onClick={handleNotification}
               disabled={isLoading || !message.trim()}
               className="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
             >
@@ -166,7 +155,12 @@ export function PushNotificationManager() {
         </>
       )}
     </div>}
-*/
+    </div>
+  )
+  }
+
+
+
   interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
     readonly userChoice: Promise<{
