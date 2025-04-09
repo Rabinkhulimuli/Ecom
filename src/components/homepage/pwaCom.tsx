@@ -98,7 +98,7 @@ export function PushNotificationManager() {
 
 
   if (!isSupported) {
-    return <p className="text-red-500">Push notifications are not supported in this browser.</p>
+    return <></>
   }
 const handleNotification=async()=> {
   await sendNotificationToAll(message)
