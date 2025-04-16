@@ -1,12 +1,17 @@
 "use client";
-import React, {  useCallback, useEffect, useState } from "react";
+import React, {  useCallback, useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { carouselArray } from "@/config/carouselRight";
 import Autoplay, { AutoplayType } from "embla-carousel-autoplay";
 import RightContent from "./RigthContent";
+
 function Rightfirst() {
   const [activeSlide, setActiveSlide] = useState(0);
+  
   const[isAutoplay,setIsAutoplay]= useState<AutoplayType|null>(null)
+
+
+  
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
      loop:true,
@@ -17,7 +22,7 @@ function Rightfirst() {
   );
   
   
-  const arr = Array.from({ length: 5 });
+  const arr =useMemo(()=> Array.from({length: 5 }),[]) 
   useEffect(()=> {
     if(!emblaApi) return
     const autoplay= emblaApi.plugins().autoplay

@@ -2,14 +2,14 @@ import Image from "next/image";
 import { BsArrowRight } from "react-icons/bs";
 import { FaApple } from "react-icons/fa";
 
-interface RightContentProps {
+ interface RightContentProps {
     ehv: {
       id: number;
       name: string;
       des: string;
       image: string;
     };
-  }
+  } 
 const  RightContent:React.FC<RightContentProps>= ({ehv})=> {
 
     return(<>
@@ -40,7 +40,7 @@ const  RightContent:React.FC<RightContentProps>= ({ehv})=> {
               <div className="max-w-40 max-h-62 sm:max-w-124  sm:max-h-86 lg:max-w-80 lg:max-h-60  ">
                   <Image
                     className="w-full h-full object-cover"
-                    src={ehv.image}
+                    src={ehv.image[0]}
                     alt={ehv.name}
                     width={1024}
                     height={720}

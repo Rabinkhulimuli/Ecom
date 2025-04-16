@@ -41,7 +41,9 @@ const nextConfig: NextConfig = {
     ]
   },
   images: {
-    domains: ["lh3.googleusercontent.com"], // Add any other domains if necessary
+    domains: ["lh3.googleusercontent.com","cdn.dummyjson.com","res.cloudinary.com"], // Add any other domains if necessary
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 300,
   },
 }
 export default nextConfig;
