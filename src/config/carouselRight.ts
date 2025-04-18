@@ -32,7 +32,7 @@ export const secProduct = [
     price: 120,
     NumStar: 0,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
   {
     id: 1,
@@ -41,7 +41,7 @@ export const secProduct = [
     price: 120,
     NumStar: 0,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
   {
     id: 2,
@@ -50,7 +50,7 @@ export const secProduct = [
     price: 120,
     NumStar: 0,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
   {
     id: 3,
@@ -59,7 +59,8 @@ export const secProduct = [
     price: 120,
     NumStar: 4,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
+    
   },
   {
     id: 4,
@@ -68,7 +69,7 @@ export const secProduct = [
     price: 120,
     NumStar: 5,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
   {
     id: 5,
@@ -77,7 +78,7 @@ export const secProduct = [
     price: 120,
     NumStar: 3,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
   {
     id: 6,
@@ -86,7 +87,7 @@ export const secProduct = [
     price: 120,
     NumStar: 3,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
   {
     id: 7,
@@ -95,6 +96,6 @@ export const secProduct = [
     price: 120,
     NumStar: 3,
     totalStar: 0,
-    image: "/homepage/secCarousel/havit.jpg",
+    image:"/homepage/secCarousel/havit.jpg"
   },
 ];

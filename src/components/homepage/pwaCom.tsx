@@ -41,7 +41,6 @@ export function PushNotificationManager() {
       });
       const sub = await registration.pushManager.getSubscription();
       setSubscription(sub);
-      setIsActive(!!sub);
     } catch (err) {
       console.error("ServiceWorker registration failed:", err);
       setError("Service Worker registration failed");
