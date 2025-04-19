@@ -206,7 +206,7 @@ const ProductCard = React.memo(({ product,isLoading }: { product: allProductResp
           <GiBleedingEye className="w-6 h-6 md:w-8 md:h-8 bg-white p-1 rounded-full z-10" />
         </div>
       </div>
-      <div className="mt-4 flex flex-col gap-2 font-semibold">
+      <div className="mt-4 flex flex-col gap-2 font-semibold max-w-64 overflow-x-clip">
         <h2>{product.name}</h2>
         <div className="flex gap-2">
           {product.discount > 0 && <p>${discountPrice.toFixed(2)}</p>}
